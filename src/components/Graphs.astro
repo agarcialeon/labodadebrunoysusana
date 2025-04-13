@@ -1,0 +1,225 @@
+---
+
+---
+
+<!-- GRAPHS -->
+<section class="graphs-section fluid-column">
+  <div>
+    <div class="title urbanist-900">La ecuación del amor</div>
+    <p>
+      En la historia de las matemáticas existen tres amores imposibles. Todos
+      ellos dados por una ecuación que define esa relación.
+    </p>
+
+    <div class="graphs">
+      <div class="graph">
+        <div id="parallel"></div>
+        <p>x = 1</p>
+        <p>x = -1</p>
+        <h3>Lineas paralelas</h3>
+        <p>Almas gemelas que nunca están destinadas a encontrarse</p>
+      </div>
+
+      <div class="graph">
+        <div id="asymptote"></div>
+        <p>x = 1</p>
+        <p>x = -1</p>
+        <h3>Asíntota</h3>
+        <p>Cada vez más cerca, pero nunca estarán juntas</p>
+      </div>
+
+      <div class="graph">
+        <div id="tangent"></div>
+        <p>x = 1</p>
+        <p>x = -1</p>
+        <h3>Tangente</h3>
+        <p>Estar juntos una vez, y luego separarse para siempre</p>
+      </div>
+
+      <div class="graph">
+        <div id="sine"></div>
+        <p>y = sin(x)</p>
+        <p>y = cos(x)</p>
+        <h3>Seno y coseno</h3>
+        <p>Nunca sincronizados. Enamorándose y desenamorándose a cada paso.</p>
+      </div>
+    </div>
+
+    <p>
+      Sin embargo, sabemos que el (verdadero) amor no es tan simple y depende de
+      varios factores. Es por eso que para dar con la clave necesitamos más de
+      una ecuación.
+    </p>
+
+    <div class="graphs">
+      <div class="graph">
+        <div id="first"></div>
+        <form>
+          <label for="">x =</label>
+          <input type="text" />
+        </form>
+      </div>
+
+      <div class="graph">
+        <div id="second"></div>
+        <form>
+          <label for="">x =</label>
+          <input type="text" />
+        </form>
+      </div>
+
+      <div class="graph">
+        <div id="third"></div>
+        <form>
+          <label for="">x =</label>
+          <input type="text" />
+        </form>
+      </div>
+
+      <div class="graph">
+        <div id="fourth"></div>
+        <form>
+          <label for="">x =</label>
+          <input type="text" />
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import functionPlot from "function-plot";
+
+  functionPlot({
+    target: "#parallel",
+    width: 250,
+    height: 250,
+    data: [
+      {
+        fn: "1",
+      },
+      {
+        fn: "-1",
+      },
+    ],
+  });
+
+  functionPlot({
+    target: "#asymptote",
+    width: 250,
+    height: 250,
+    data: [
+      {
+        fn: "1 / x",
+      },
+      {
+        fn: "0",
+      },
+    ],
+  });
+
+  functionPlot({
+    target: "#tangent",
+    width: 250,
+    height: 250,
+    data: [
+      {
+        fn: "sqrt(4 - x^2)",
+      },
+      {
+        fn: "2",
+      },
+    ],
+  });
+
+  functionPlot({
+    target: "#sine",
+    width: 250,
+    height: 250,
+    data: [
+      {
+        fn: "sin(x)",
+      },
+      {
+        fn: "cos(x)",
+      },
+    ],
+  });
+
+  // LOVE
+  functionPlot({
+    target: "#first",
+    width: 250,
+    height: 250,
+    xAxis: { domain: [-1, 9] },
+    yAxis: { domain: [-1, 9] },
+    data: [
+      {
+        fn: "1 / x",
+      },
+    ],
+  });
+
+  functionPlot({
+    target: "#second",
+    width: 250,
+    height: 250,
+    xAxis: { domain: [-4, 4] },
+    yAxis: { domain: [-4, 4] },
+    data: [
+      {
+        fn: "sqrt(9 - x^2)",
+      },
+      {
+        fn: "-sqrt(9 - x^2)",
+      },
+    ],
+  });
+
+  functionPlot({
+    target: "#third",
+    width: 250,
+    height: 250,
+    data: [
+      {
+        fn: "abs(2x) - 5",
+      },
+    ],
+  });
+
+  functionPlot({
+    target: "#fourth",
+    width: 250,
+    height: 250,
+    data: [
+      {
+        fn: "asin(abs(x / 2))",
+      },
+    ],
+  });
+</script>
+
+<style>
+  /* GRAPHS STYLES */
+  .graphs-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+  }
+
+  .graphs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .graph {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+    gap: 16px;
+  }
+</style>

@@ -1,0 +1,335 @@
+---
+
+---
+
+<section class="intro__container">
+  <canvas id="sky" class="absolute"></canvas>
+
+  <section
+    class="fluid-column text-slate-100 flex flex-column justify-stretch items-center"
+  >
+    <section class="two-columns">
+      <section class="intro">
+        <h1 class="urbanist-900 text-4xl">¡Enhorabuena pareja!</h1>
+
+        <p class="my-3">
+          Estamos felices de veros juntos y poder disfrutar con vosotros de este
+          día tan importante. Para celebrarlo hemos preparado esta web en la que
+          queremos contar una historia tan bonita como la de vuestro amor.
+        </p>
+
+        <p class="my-3">
+          Para que la experiencia sea más inmersiva, os rogamos que sigais las
+          recomendaciones que encontrareis en los apartados en el lateral de
+          esta sección.
+        </p>
+
+        <p class="my-4">
+          Cuando estéis listos, empezad la historia pulsando en el siguiente
+          botón.
+        </p>
+
+        <button type="button" class="border-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-6"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm14.024-.983a1.125 1.125 0 0 1 0 1.966l-5.603 3.113A1.125 1.125 0 0 1 9 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113Z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <span>Comenzar</span>
+        </button>
+      </section>
+
+      <aside>
+        <h2 class="text-2xl text-slate-100">Recomendaciones</h2>
+        <details name="accordion">
+          <summary>Sonido</summary>
+          <span
+            >Se recomienda activar el sonido de vuestro dispositivo puesto que
+            esta página incluye sonidos y música ambiente que acompaña al
+            contenido de la historia.
+          </span>
+        </details>
+        <details name="accordion">
+          <summary>Entorno</summary>
+          <span
+            >Relajaos y poneros cómodos, por ejemplo sentandoos en el sofá, en
+            el suelo junto a una mesa. Podéis prepararos unas palomitas o
+            incluso un helado o batido calentido dependiendo de la estación del
+            año.
+          </span>
+        </details>
+        <details name="accordion">
+          <summary>Dispositivo</summary>
+          <span
+            >Esta web ha sido pensada para ser visualizada tanto en dispositivos
+            de sobremesa (PC/portátil) como dispositivos móviles. Aún así, se
+            recomienda usar un dispositivo con un tamaño de pantalla de al menos
+            XXXX x XXXX para ajustar mejor el contenido de la web a la
+            experiencia inicialmente diseñada.
+          </span>
+        </details>
+      </aside>
+    </section>
+  </section>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const canvas = document.getElementById("sky") as HTMLCanvasElement;
+    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+
+    // Set canvas to full browser width and height
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Star settings
+    const numberOfStars = 200;
+    let stars: any[] = [];
+
+    // Helper function to generate a random number
+    function random(min: number, max: number) {
+      return Math.random() * (max - min) + min;
+    }
+
+    // Initialize stars with properties
+    function initStars() {
+      for (let i = 0; i < numberOfStars; i++) {
+        stars.push({
+          x: random(0, canvas.width),
+          y: random(0, canvas.height),
+          radius: random(0.5, 3),
+          opacity: random(0.5, 1),
+          increment: random(0.01, 0.02) * (Math.random() < 0.5 ? 1 : -1),
+        });
+      }
+    }
+
+    // Draw stars with gradually updating opacities
+    function updateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+      stars.forEach((star) => {
+        star.opacity += star.increment;
+        if (star.opacity <= 0.1 || star.opacity >= 1) {
+          star.increment = -star.increment; // Reverse the increment direction
+        }
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2, false);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+        ctx.fill();
+      });
+    }
+
+    function updateSky() {
+      updateStars();
+      requestAnimationFrame(updateSky); // Smoother transitions
+    }
+
+    initStars();
+    updateSky();
+  });
+</script>
+
+<style>
+  .intro__container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100dvh;
+  }
+
+  canvas {
+    display: block;
+    height: 100%;
+    width: 100%;
+    background-color: #202639;
+  }
+
+  .two-columns {
+    position: relative;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 16px;
+    min-height: 100%;
+  }
+
+  /* START BUTTON */
+  .border-button {
+    --bg: color-mix(in hsl, canvas, canvasText 10%);
+    --color: color-mix(in hsl, canvasText, canvas 20%);
+    color: var(--color);
+    position: relative;
+    padding: 0.5rem 1rem;
+    border: calc(var(2) * 1px) solid transparent;
+    background: linear-gradient(var(--bg), var(--bg)) padding-box;
+    font-family: sans-serif;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    outline-offset: 0.25rem;
+    outline-color: hsl(210 100% 60%);
+    svg {
+      width: 24px;
+    }
+
+    span {
+      white-space: nowrap;
+    }
+  }
+  .border-button::after,
+  .border-button::before {
+    content: "";
+    border-radius: 12px;
+    position: absolute;
+    inset: calc(var(2) * -1px);
+    z-index: -1;
+  }
+
+  .border-button::before {
+    background: color-mix(in hsl, var(--color), canvas 75%);
+  }
+
+  @property --complete {
+    initial-value: 0;
+    syntax: "<number>";
+    inherits: true;
+  }
+
+  [data-style="single"] {
+    .border-button::after {
+      mask: conic-gradient(
+        from calc(var(--from, 0) * 1deg),
+        #000 calc(var(--complete) * 1%),
+        #0000 calc(var(--complete) * 1%)
+      );
+    }
+  }
+
+  [data-style="double"] {
+    .border-button::after {
+      mask: conic-gradient(
+        from calc(var(--from, 0) * 1deg),
+        #000 calc(var(--complete) * 1%),
+        #0000 calc(var(--complete) * 1%),
+        #0000 calc((100 - var(--complete)) * 1%),
+        #000 calc((100 - var(--complete)) * 1%)
+      );
+    }
+  }
+
+  .border-button::after {
+    background: linear-gradient(
+      65deg,
+      hsl(280 90% 60%),
+      hsl(35 100% 55%),
+      hsl(10 100% 55%)
+    );
+    mask-size: 200px 200px;
+    mask-position: 50% 50%;
+    transition: --complete 0.6s;
+    transition-timing-function: linear(
+      0 0%,
+      0.0027 3.64%,
+      0.0106 7.29%,
+      0.0425 14.58%,
+      0.0957 21.87%,
+      0.1701 29.16%,
+      0.2477 35.19%,
+      0.3401 41.23%,
+      0.5982 55.18%,
+      0.7044 61.56%,
+      0.7987 68.28%,
+      0.875 75%,
+      0.9297 81.25%,
+      0.9687 87.5%,
+      0.9922 93.75%,
+      1 100%
+    );
+  }
+
+  .border-button:is(:hover, :focus-visible) {
+    --complete: 100;
+  }
+
+  /* RECOMENDACIONES */
+
+  summary {
+    width: 100%;
+    padding-block: 1rem;
+    border-bottom: 1px solid canvasText;
+  }
+
+  summary:focus-visible {
+    outline-offset: 4px;
+    outline-color: red;
+  }
+
+  details span {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    font-weight: 300;
+    transition-duration: 1s;
+    padding-block: 1rem;
+  }
+
+  details::details-content {
+    overflow: hidden;
+    opacity: 0;
+    height: 0;
+    transition: content-visibility, opacity, height;
+    transition-behavior: allow-discrete;
+    transition-duration: calc(var(--duration, 0.5) * 1s);
+    mask: linear-gradient(#000 calc(100% - 1rem), #0000);
+  }
+
+  [open]::details-content {
+    height: calc-size(auto);
+    opacity: 1;
+  }
+
+  summary {
+    display: flex;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    padding-block: 1rem;
+  }
+
+  summary::after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' %3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' /%3E%3C/svg%3E%0A");
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 20px;
+    translate: 0 -35%;
+    transition: scale calc(var(--duration, 0.5) * 1s);
+    transform-origin: 50% 40%;
+  }
+
+  [data-theme="dark"] summary::after {
+    filter: invert(1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    summary::after {
+      filter: invert(1);
+    }
+  }
+
+  details[open] summary::after {
+    /* rotate: -180deg; */
+    scale: -1;
+  }
+</style>
