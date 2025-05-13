@@ -1,0 +1,111 @@
+---
+import { Image } from "astro:assets";
+import barcode from "../images/drugs/barcode.png";
+import medicamento4 from "../images/drugs/medicamento4.jpg";
+---
+
+<!-- DRUGS -->
+<section class="fluid-column">
+    <div class="prescription_form bg-blue-50 border-2 border-gray-500">
+        <div class="flex flex-col justify-start items-stretch p-4">
+            <div class="header">
+                <div class="w-full flex justify-start items-stretch">
+                    <img src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png" width="64" height="64" alt="Logo hospital">
+                    <div class="w-full flex justify-center items-center">
+                        <p>
+                            <span class="font-semibold">RECÉTA MÉDICA PARA ASISTENCIA SANITARIA</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="main grid-cols-[50px_1fr]">
+                <div class="aside rotate-90" style="writingMode: 'vertical-rl'">RECÉTA MÉDICA</div>
+                
+                <div class="grid grid-cols-6 grid-rows-4 gap-0">
+                    <div class="col-span-2 row-span-4 border-1 p-2">
+                        <p><span class="font-semibold">PRESCRIPCIÓN:</span> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero voluptates recusandae laboriosam tenetur distinctio, temporibus voluptatem placeat quo eius quam vel fuga explicabo ipsam, veritatis natus, incidunt inventore aut quos?</p>
+                        <p>Núm. envases / unidades:</p>
+                        <p>Vía de administración ______________________</p>
+                    </div>
+                    <div class="col-span-2 col-start-3 row-start-4 border-1 p-2">
+                        <div class="flex justify-between items-stretch">
+                            <p>Nº de orden dispensación</p>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                        <div>
+                            <p>Fecha prevista</p>
+                            <p>_____/_____/________</p>
+                        </div>
+                    </div>
+                    <div class="col-span-2 col-start-3 row-span-3 border-1">
+                        <div class="grid grid-rows-3">
+                            <div class="grid grid-rows-1">
+                                <p>Duración del tratamiento</p>
+                            </div>
+                            <div class="grid grid-rows-1">
+                                Posología
+                            </div>
+                            <div class="grid grid-cols-2 grid-rows-1">
+                                <div class="grid grid-cols-2 grid-rows-2">
+                                    <div class="border-1 p-2">Unidades</div>
+                                    <div class="border-1 p-2">1</div>
+                                    <div class="border-1 p-2">Pauta</div>
+                                    <div class="border-1 p-2">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-2 row-span-2 col-start-5 row-start-1 border-1 p-2">
+                        <p><span class="font-semibold">PACIENTE</span> (Nombre, apellidos, año de nacimiento y nº de DNI / NIE)</p>
+                    </div>
+                    <div class="col-span-6 row-span-1 col-start-1 row-start-5 border-1 p-2">
+                        <p><span class="font-semibold">DIAGNÓSTICO</span> (si procede)</p>
+                    </div>
+                    <div class="col-span-6 row-span-2 col-start-1 row-start-6 border-1 p-2">
+                        <span class="font-semibold">INSTRUCCIONES AL PACIENTE</span> (si procede)
+                    </div>
+                    <div class="col-span-2 row-span-2 col-start-5 row-start-3 border-1 p-2">
+                        <div>
+                            <p><span class="font-semibold">PRESCRIPTOR</span></p>
+                            <p>Doctor Name: </p>
+
+                            <p>Fecha de la prescripción *: ______/______/_________</p>
+
+                            <Image
+                                src={medicamento4}
+                                class="w-64"
+                                title="medicamento"
+                                alt="Medicamento 4">
+                            </Image>
+                        </div>
+                    </div>
+
+                    <div class="col-span-6 row-span-2 grid grid-cols-3 grid-rows-1 border-1 p-2">
+                        <div class="">
+                            <p>La validez de esta receta expira a los 10 días naturales de la fecha prevista para la dispensación, o en su defecto de la fecha de prescripción. La medicación prescrita no superará los 6 meses de tratamiento. La receta es válida para una única dispensación en la farmacia. Esta receta podrá ser dispensada en cualquier ofician de farmacia del territorio nacional.</p>
+                        </div>
+                        <div class="barcode flex flex-col justify-center items-center border-2">
+                            <Image
+                                src={barcode}
+                                class=""
+                                title="barcode"
+                                alt="Código de barras">
+                            </Image>
+                            <p>QLFJSDKFAJSDFISJFKASLDFJASKDFAS6F7AS6D7FA8</p>
+                        </div>
+                        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur debitis magnam sunt neque commodi quaerat velit quo perferendis, officia illum mollitia asperiores laudantium quod unde ipsum blanditiis tempore. Pariatur, animi.</div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</section>
+  
+<script>
+
+</script>
+  
+<style>
+
+</style>
+  

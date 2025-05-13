@@ -1,24 +1,20 @@
 ---
 import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
-import Intro from "../components/Intro.astro";
+import Tinder from "../components/Tinder.astro";
 import { ClientRouter } from 'astro:transitions';
 ---
-
-<!-- Añadir juego con código QR -->
- <!-- Añadir envelope con mensaje (invitacion abriendose con instrucciones) -->
 
 <Layout title="Bruno boda.">
 
   <ClientRouter />
-  <header>
-    <Intro transition:animate="fade"/>
+  <main class="main gradient">
+    <Tinder transition:animate="fade" />
 
     <section>
-      <a href="/stars">Siguiente</a>
+      <a href="/unlock">Siguiente</a>
     </section>
-  </header>
-  <footer class="footer">Footer</footer>
+  </main>
 </Layout>
 
 <style>

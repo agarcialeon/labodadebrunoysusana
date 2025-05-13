@@ -1,23 +1,24 @@
 ---
 import "../styles/global.css";
-import Layout from "../layouts/Layout.astro";
-import Intro from "../components/Intro.astro";
-import { ClientRouter } from 'astro:transitions';
----
 
-<!-- Añadir juego con código QR -->
- <!-- Añadir envelope con mensaje (invitacion abriendose con instrucciones) -->
+import Layout from "../layouts/Layout.astro";
+import ClientRouter from "astro/components/ClientRouter.astro";
+import Drugs from "../components/Drugs.astro";
+---
 
 <Layout title="Bruno boda.">
 
-  <ClientRouter />
-  <header>
-    <Intro transition:animate="fade"/>
+    <ClientRouter />
+  <main class="main gradient">
+    <Drugs transition:animate="fade" />
 
+    
+    <!-- https://cima.aemps.es/cima/publico/lista.html -->
+    
     <section>
-      <a href="/stars">Siguiente</a>
+      <a href="/maths">Siguiente</a>
     </section>
-  </header>
+  </main>
   <footer class="footer">Footer</footer>
 </Layout>
 

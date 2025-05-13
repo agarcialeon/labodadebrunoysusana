@@ -1,23 +1,21 @@
 ---
 import "../styles/global.css";
-import Layout from "../layouts/Layout.astro";
-import Intro from "../components/Intro.astro";
-import { ClientRouter } from 'astro:transitions';
----
 
-<!-- Añadir juego con código QR -->
- <!-- Añadir envelope con mensaje (invitacion abriendose con instrucciones) -->
+import Graphs from "../components/Graphs.astro";
+import Layout from "../layouts/Layout.astro";
+import ClientRouter from "astro/components/ClientRouter.astro";
+---
 
 <Layout title="Bruno boda.">
 
-  <ClientRouter />
-  <header>
-    <Intro transition:animate="fade"/>
-
+    <ClientRouter />
+  <main class="main gradient">
+    <Graphs transition:animate="fade" />
+    
     <section>
-      <a href="/stars">Siguiente</a>
+      <a href="/memories">Siguiente</a>
     </section>
-  </header>
+  </main>
   <footer class="footer">Footer</footer>
 </Layout>
 
