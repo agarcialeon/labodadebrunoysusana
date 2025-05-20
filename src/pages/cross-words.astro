@@ -3,17 +3,15 @@ import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import Tinder from "../components/Tinder.astro";
 import { ClientRouter } from "astro:transitions";
+import Crosswords from "../components/Crosswords.astro";
 ---
 
-<Layout title="Amor a primer match | La boda de Bruno y Susana">
+<Layout title="Bruno boda.">
   <ClientRouter />
-  <main class="main bg-yellow-400">
-    <Tinder transition:animate="fade" />
-
+  <main class="main gradient">
+    <Crosswords />
     <section>
-      <a href="/labodadebrunoysusana/love-and-other-drugs">Siguiente</a>
+      <a href="/labodadebrunoysusana/unlock">Siguiente</a>
     </section>
   </main>
 </Layout>
-
-<style></style>

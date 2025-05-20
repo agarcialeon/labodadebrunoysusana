@@ -1,17 +1,21 @@
 ---
-
+import { Play } from "@lucide/astro";
 ---
 
-<section class="intro__container">
-  <canvas id="sky" class="absolute"></canvas>
+<section
+  class="intro__container relative h-full w-full flex justify-center items-center"
+>
+  <canvas id="sky" class="absolute z-0"></canvas>
 
   <section
-    class="fluid-column text-slate-100 flex flex-column justify-stretch items-center"
+    class="text-slate-100 z-1 w-[50%] h-[70%] p-4 m-auto isolate aspect-video rounded-xl bg-white/20 shadow-lg ring-1 ring-black/5"
   >
-    <section class="two-columns">
-      <section class="intro">
-        <h1 class="urbanist-900 text-4xl">¡Enhorabuena pareja!</h1>
+    <section
+      class="flex flex-col justify-start items-stretch gap-4 text-slate-50"
+    >
+      <h1 class="text-6xl text-center">Bienvenidos</h1>
 
+      <section class="intro">
         <p class="my-3">
           Estamos felices de veros juntos y poder disfrutar con vosotros de este
           día tan importante. Para celebrarlo hemos preparado esta web en la que
@@ -28,24 +32,9 @@
           Cuando estéis listos, empezad la historia pulsando en el siguiente
           botón.
         </p>
-
-        <button type="button" class="border-button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="size-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm14.024-.983a1.125 1.125 0 0 1 0 1.966l-5.603 3.113A1.125 1.125 0 0 1 9 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113Z"
-              clip-rule="evenodd"></path>
-          </svg>
-          <span>Comenzar</span>
-        </button>
       </section>
 
-      <aside>
+      <section>
         <h2 class="text-2xl text-slate-100">Recomendaciones</h2>
         <details name="accordion">
           <summary>Sonido</summary>
@@ -74,7 +63,16 @@
             experiencia inicialmente diseñada.
           </span>
         </details>
-      </aside>
+      </section>
+
+      <a
+        class="border-2 border-gray-200 p-2 rounded-4xl flex justify-center items-center hover:bg-gray-500"
+        href="/labodadebrunoysusana/red-thread"
+      >
+        <span class="flex justify-center items-center gap-2">
+          <Play /> Comenzar</span
+        ></a
+      >
     </section>
   </section>
 </section>
@@ -136,28 +134,18 @@
 </script>
 
 <style>
-  .intro__container {
+  /* .intro__container {
     position: relative;
     width: 100%;
     height: 100%;
     min-height: 100dvh;
-  }
+  } */
 
   canvas {
     display: block;
     height: 100%;
     width: 100%;
     background-color: #202639;
-  }
-
-  .two-columns {
-    position: relative;
-    padding: 2rem;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 1fr;
-    gap: 16px;
-    min-height: 100%;
   }
 
   /* START BUTTON */

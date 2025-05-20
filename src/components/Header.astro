@@ -1,0 +1,47 @@
+---
+import { Volume2 } from "@lucide/astro";
+import { SunMoon } from "@lucide/astro";
+import { ArrowRight } from "@lucide/astro";
+import { ArrowLeft } from "@lucide/astro";
+import { House } from "@lucide/astro";
+---
+
+<header class="w-full h-[50px]">
+  <nav class="h-full text-white flex justify-end items-center px-8">
+    <ul class="flex justify-center items-center gap-4">
+      <li title="Inicio">
+        <a href="/"
+          ><div
+            class="hover:bg-sky-700 p-2 hover:outline-[1px] hover:outline-sky-500 rounded-xl"
+          >
+            <House />
+          </div></a
+        >
+      </li>
+      <li title="Anterior">
+        <button
+          class="hover:bg-sky-700 p-2 rounded-xl hover:outline-[1px] hover:outline-sky-500 hover:cursor-pointer"
+          ><ArrowLeft /></button
+        >
+      </li>
+      <li title="Siguiente">
+        <button
+          class="hover:bg-sky-700 p-2 rounded-xl hover:outline-[1px] hover:outline-sky-500 hover:cursor-pointer"
+          ><ArrowRight /></button
+        >
+      </li>
+      <li title="Volumen">
+        <button
+          class="hover:bg-sky-700 p-2 rounded-xl hover:outline-[1px] hover:outline-sky-500 hover:cursor-pointer"
+          ><Volume2 /></button
+        >
+      </li>
+      <li title="Tema">
+        <button
+          class="hover:bg-sky-700 p-2 rounded-xl hover:outline-[1px] hover:outline-sky-500 hover:cursor-pointer"
+          ><SunMoon /></button
+        >
+      </li>
+    </ul>
+  </nav>
+</header>

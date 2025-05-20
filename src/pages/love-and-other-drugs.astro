@@ -6,20 +6,17 @@ import ClientRouter from "astro/components/ClientRouter.astro";
 import Drugs from "../components/Drugs.astro";
 ---
 
-<Layout title="Bruno boda.">
-
-    <ClientRouter />
+<Layout title="Amor y otras drogas | La boda de Bruno y Susana">
+  <ClientRouter />
   <main class="main gradient">
     <Drugs transition:animate="fade" />
 
-    
     <!-- https://cima.aemps.es/cima/publico/lista.html -->
-    
+
     <section>
-      <a href="/maths">Siguiente</a>
+      <a href="/labodadebrunoysusana/memories">Siguiente</a>
     </section>
   </main>
-  <footer class="footer">Footer</footer>
 </Layout>
 
 <style>
