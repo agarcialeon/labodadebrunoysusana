@@ -1,0 +1,18 @@
+.emoji {
+  font-size: xxx-large
+}
+
+.puzzle{
+  margin-bottom: 2rem
+}
+
+.respuesta,
+.input{
+  font-size: xx-large;
+}
+
+.emoji
+.respuesta,
+.input{
+  margin: 0 1rem;
+}
