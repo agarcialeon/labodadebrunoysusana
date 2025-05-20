@@ -9,7 +9,7 @@ import Drugs from "../components/Drugs.astro";
 <Layout title="Amor y otras drogas | La boda de Bruno y Susana">
   <ClientRouter />
   <main class="main gradient">
-    <Drugs transition:animate="fade" />
+    <Drugs transition:animate="fade" client:load />
 
     <!-- https://cima.aemps.es/cima/publico/lista.html -->
 

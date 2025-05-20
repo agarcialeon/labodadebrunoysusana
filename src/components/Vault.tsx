@@ -9,8 +9,8 @@ type Inputs = {
 };
 
 export default function Vault() {
-  const [isUnlocked, setIsUnlocked] = useState(true);
-  const [isExploding, setIsExploding] = useState(true);
+  const [isUnlocked] = useState(true);
+  const [isExploding] = useState(true);
 
   const {
     register,

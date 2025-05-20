@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
-import Tinder from "../components/Tinder.astro";
 import { ClientRouter } from "astro:transitions";
 import Crosswords from "../components/Crosswords.astro";
 ---
@@ -9,7 +8,7 @@ import Crosswords from "../components/Crosswords.astro";
 <Layout title="Bruno boda.">
   <ClientRouter />
   <main class="main gradient">
-    <Crosswords />
+    <Crosswords client:load />
     <section>
       <a href="/labodadebrunoysusana/unlock">Siguiente</a>
     </section>
