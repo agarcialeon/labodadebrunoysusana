@@ -1,6 +1,4 @@
 ---
-import "../styles/global.css";
-
 import Layout from "../layouts/Layout.astro";
 import ClientRouter from "astro/components/ClientRouter.astro";
 import Drugs from "../components/Drugs.astro";
@@ -9,7 +7,7 @@ import Drugs from "../components/Drugs.astro";
 <Layout title="Amor y otras drogas | La boda de Bruno y Susana">
   <ClientRouter />
   <main class="main gradient">
-    <Drugs transition:animate="fade" client:load />
+    <Drugs transition:animate="fade" />
 
     <!-- https://cima.aemps.es/cima/publico/lista.html -->
 

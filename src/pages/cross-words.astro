@@ -1,5 +1,4 @@
 ---
-import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import { ClientRouter } from "astro:transitions";
 import Crosswords from "../components/Crosswords.astro";
@@ -8,7 +7,7 @@ import Crosswords from "../components/Crosswords.astro";
 <Layout title="Bruno boda.">
   <ClientRouter />
   <main class="main gradient">
-    <Crosswords client:load />
+    <Crosswords />
     <section>
       <a href="/labodadebrunoysusana/unlock">Siguiente</a>
     </section>

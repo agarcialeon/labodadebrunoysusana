@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from './Places.module.css';
+import styles from "./places.module.css";
 
 const steps = [
   {
@@ -38,7 +38,8 @@ export default function Places() {
     setInputs(newInputs);
 
     if (
-      value.trim().toLocaleLowerCase() === steps[index].title.toLocaleLowerCase() &&
+      value.trim().toLocaleLowerCase() ===
+        steps[index].title.toLocaleLowerCase() &&
       unlockedSteps === index + 1 &&
       index + 1 < steps.length
     ) {
@@ -46,11 +47,17 @@ export default function Places() {
     }
   };
 
-  const allCorrect = inputs.every((input, idx) => input.trim() === steps[idx].title);
+  const allCorrect = inputs.every(
+    (input, idx) => input.trim() === steps[idx].title
+  );
 
   return (
     <div className="flex flex-col gap-8">
-      <h1>Viajemos un poco por vuestra historia, a lo largo de esta página encontraréis ciertos símbolos, los cuales tienen mucha relacion con vosotros. ¿Podéis encontrar los lugares que se encuentran tras ellos?</h1>
+      <h1>
+        Viajemos un poco por vuestra historia, a lo largo de esta página
+        encontraréis ciertos símbolos, los cuales tienen mucha relacion con
+        vosotros. ¿Podéis encontrar los lugares que se encuentran tras ellos?
+      </h1>
       <h2>PD: Poned tíldes, sino muchos gatitos morirán.</h2>
       {steps.map((step, index) => (
         <div key={index} className="flex flex-col gap-2">
@@ -59,21 +66,26 @@ export default function Places() {
               <h3>Puzzle número {index + 1}</h3>
               <ul className="flex items-center">
                 {step.emojis.map((emoji, i) => (
-                  <li key={i} className={styles.emoji}>{emoji}</li>
+                  <li key={i} className={styles.emoji}>
+                    {emoji}
+                  </li>
                 ))}
               </ul>
               <div className={styles.respuesta}>
-              <label htmlFor={`respuesta-${index}`} className="font-medium mt-2">
-                Respuesta:
-              </label>
-              <input
-                id={`respuesta-${index}`}
-                type="text"
-                placeholder="Escribe el nombre exacto"
-                value={inputs[index]}
-                onChange={(e) => handleChange(index, e.target.value)}
-                className={styles.input}
-              />
+                <label
+                  htmlFor={`respuesta-${index}`}
+                  className="font-medium mt-2"
+                >
+                  Respuesta:
+                </label>
+                <input
+                  id={`respuesta-${index}`}
+                  type="text"
+                  placeholder="Escribe el nombre exacto"
+                  value={inputs[index]}
+                  onChange={(e) => handleChange(index, e.target.value)}
+                  className={styles.input}
+                />
               </div>
             </div>
           )}

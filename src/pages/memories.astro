@@ -1,5 +1,4 @@
 ---
-import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import { ClientRouter } from "astro:transitions";
 import Photos from "../components/Photos.astro";
@@ -8,7 +7,7 @@ import Photos from "../components/Photos.astro";
 <Layout title="Las 7 diferencias | La boda de Bruno y Susana">
   <ClientRouter />
   <main class="main gradient">
-    <Photos transition:animate="fade" client:load />
+    <Photos transition:animate="fade" />
 
     <section>
       <a href="/labodadebrunoysusana/butterflies">Siguiente</a>

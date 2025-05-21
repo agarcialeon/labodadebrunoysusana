@@ -1,5 +1,5 @@
 import functionPlot from "function-plot";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 type Inputs = {
@@ -11,18 +11,12 @@ type Inputs = {
 
 // El código de este juego es la fecha de la boda
 export default function Graphs() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
-  const paralleRef = useRef(null);
 
   useEffect(() => {
     functionPlot({
-      target: paralleRef.current as any,
+      target: "#parallel",
       width: 250,
       height: 250,
       data: [
@@ -128,7 +122,7 @@ export default function Graphs() {
         },
       ],
     });
-  }, [paralleRef]);
+  });
 
   return (
     <section className="flex flex-col justify-start items-stretch gap-8 fluid-column">
@@ -140,7 +134,7 @@ export default function Graphs() {
 
       <div className="flex justify-around items-center">
         <div className="flex flex-col justify-start items-center gap-4">
-          <div id="parallel" ref={paralleRef}></div>
+          <div id="parallel"></div>
           <p>x = 1</p>
           <p>x = -1</p>
           <h3>Lineas paralelas</h3>

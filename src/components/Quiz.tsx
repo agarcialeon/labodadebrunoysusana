@@ -4,11 +4,19 @@ import avatarSusana from "../images/quiz/quiz_susana.png";
 export default function Quiz() {
   return (
     <div>
-      <div className="rounded-3xl">
-        <img src={avatarBruno.src} alt="Avatar Susana" />
+      <div>
+        <img
+          className="rounded-full"
+          src={avatarBruno.src}
+          alt="Avatar Susana"
+        />
       </div>
       <div>
-        <img src={avatarSusana.src} alt="Avatar Susana" />
+        <img
+          className="rounded-full"
+          src={avatarSusana.src}
+          alt="Avatar Susana"
+        />
       </div>
       <a href="/labodadebrunoysusana/going-places">Hola mundo</a>
     </div>

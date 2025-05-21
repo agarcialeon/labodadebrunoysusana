@@ -1,5 +1,4 @@
 ---
-import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import { ClientRouter } from "astro:transitions";
 import Origami from "../components/Origami.astro";
@@ -8,7 +7,7 @@ import Origami from "../components/Origami.astro";
 <Layout title="Bruno boda.">
   <ClientRouter />
   <main class="main gradient">
-    <Origami client:load />
+    <Origami />
     <section>
       <a href="/labodadebrunoysusana/cross-words">Siguiente</a>
     </section>
