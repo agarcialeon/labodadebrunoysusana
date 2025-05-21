@@ -52,7 +52,7 @@ export default function Places() {
   );
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 bg-blue-400 pl-4">
       <h1>
         Viajemos un poco por vuestra historia, a lo largo de esta página
         encontraréis ciertos símbolos, los cuales tienen mucha relacion con
