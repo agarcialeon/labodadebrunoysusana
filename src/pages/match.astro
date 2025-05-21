@@ -1,18 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Tinder from "../components/Tinder.astro";
+import Tinder from "../components/Tinder.tsx";
 import { ClientRouter } from "astro:transitions";
 ---
 
 <Layout title="Amor a primer match | La boda de Bruno y Susana">
   <ClientRouter />
-  <main class="main bg-yellow-400">
-    <Tinder transition:animate="fade" />
-
-    <section>
-      <a href="/labodadebrunoysusana/love-and-other-drugs">Siguiente</a>
-    </section>
+  <main>
+    <Tinder transition:animate="fade" client:load />
   </main>
 </Layout>
-
-<style></style>
