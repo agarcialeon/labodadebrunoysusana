@@ -1,10 +1,10 @@
 ---
+import Quiz from "../components/Quiz";
 import Layout from "../layouts/Layout.astro";
 import { ClientRouter } from "astro:transitions";
-import Thread from "../components/Thread.tsx";
 ---
 
-<Layout title="El hilo rojo | La boda de Bruno y Susana">
+<Layout title="Quiz | La boda de Bruno y Susana">
   <ClientRouter />
-  <Thread client:load />
+  <Quiz client:load />
 </Layout>

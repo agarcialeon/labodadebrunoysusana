@@ -32,7 +32,7 @@ export default function Tinder() {
   const showMessages = () => {};
 
   return (
-    <>
+    <section className="flex flex-col items-stretch w-full h-full">
       <section className="grid grid-cols-2 gap-4 fluid-column bg-gradient-to-t from-amber-200 to-yellow-400">
         <section className="flex flex-col justify-start items-stretch text-balance">
           <div className="text-5xl text-white urbanist-900 pb-4">
@@ -299,13 +299,13 @@ export default function Tinder() {
         </section>
       </section>
 
-      <section className="flex flex-col justify-start items-center mt-8">
+      <section className="flex flex-col justify-start items-center w-full">
         <a href="/labodadebrunoysusana/love-and-other-drugs">
           <span className="border-2 p-4 rounded-4xl hover:bg-sky-700">
             Siguiente
           </span>
         </a>
       </section>
-    </>
+    </section>
   );
 }

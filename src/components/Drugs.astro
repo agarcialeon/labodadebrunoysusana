@@ -1,17 +1,23 @@
 ---
 import { Image } from "astro:assets";
+import logoFarmacia from "../images/drugs/logo-farmacia.png";
 import barcode from "../images/drugs/barcode.png";
 import medicamento4 from "../images/drugs/medicamento4.jpg";
+import finger from "../images/finger.png";
 ---
 
-<!-- DRUGS -->
-<section class="fluid-column">
+<section
+  class="fluid-column relative bg-gradient-to-br from-teal-200 to-teal-500"
+>
+  <div class="bg-white border rounded-2xl w-[64px] absolute right-5 top-5">
+    <img src={finger.src} alt="Preguntar al hilo rojo" width={64} />
+  </div>
   <div class="prescription_form bg-blue-50 border-2 border-gray-500">
     <div class="flex flex-col justify-start items-stretch p-4">
       <div class="header">
         <div class="w-full flex justify-start items-stretch">
           <img
-            src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png"
+            src={logoFarmacia.src}
             width="64"
             height="64"
             alt="Logo hospital"
@@ -138,8 +144,10 @@ import medicamento4 from "../images/drugs/medicamento4.jpg";
       </div>
     </div>
   </div>
+
+  <section>
+    <a href="/labodadebrunoysusana/memories">Siguiente</a>
+  </section>
+
+  <!-- https://cima.aemps.es/cima/publico/lista.html -->
 </section>
-
-<script></script>
-
-<style></style>

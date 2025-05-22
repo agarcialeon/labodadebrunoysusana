@@ -1,6 +1,7 @@
 import functionPlot from "function-plot";
 import { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import finger from "../images/finger.png";
 
 type Inputs = {
   input1: number;
@@ -93,10 +94,11 @@ export default function Graphs() {
       yAxis: { domain: [-4, 4] },
       data: [
         {
-          fn: "sqrt(9 - x^2)",
-        },
-        {
-          fn: "-sqrt(9 - x^2)",
+          fnType: "parametric",
+          x: "3 * cos(t)",
+          y: "3 * sin(t)",
+          graphType: "polyline",
+          range: [0, 2 * Math.PI],
         },
       ],
     });
@@ -116,16 +118,24 @@ export default function Graphs() {
       target: "#fourth",
       width: 250,
       height: 250,
+      xAxis: { domain: [-6, 2] },
+      yAxis: { domain: [-2, 8] },
       data: [
         {
-          fn: "asin(abs(x / 2))",
+          fnType: "parametric",
+          x: "-3 * abs(sin(t))",
+          y: "t",
+          graphType: "polyline",
         },
       ],
     });
   });
 
   return (
-    <section className="flex flex-col justify-start items-stretch gap-8 fluid-column">
+    <section className="flex flex-col relative justify-start items-stretch gap-8 fluid-column">
+      <div className="bg-white border rounded-2xl w-[64px] absolute right-5 top-5">
+        <img src={finger.src} alt="Preguntar al hilo rojo" width={64} />
+      </div>
       <div className="title urbanist-900">La ecuación del amor</div>
       <p className="text-center w-full py-4">
         En la historia de las matemáticas existen tres amores imposibles. Todos
