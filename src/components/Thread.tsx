@@ -1,10 +1,30 @@
 import redThread from "../images/red-thread/red-thread.png";
 import { Infinity } from "lucide-react";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { navigate } from "astro:transitions/client";
+
+type Inputs = {
+  novio: string;
+  novia: string;
+};
 
 export default function Thread() {
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitted },
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = (inputs) => {
+    console.log(`Atando el hilo rojo a ${inputs.novio} y ${inputs.novia}`);
+    setTimeout(() => {
+      navigate("/labodadebrunoysusana/your-name");
+    }, 1000);
+  };
+
   return (
     <section className="w-full h-full flex flex-col justify-center items-center bg-gradient-to-b from-rose-400 to-neutral-50">
-      <section className="max-w-[50%] flex flex-col items-stretch gap-4">
+      <section className="max-w-[65%] flex flex-col items-stretch gap-4 my-4">
         <h1 className="title font-urbanist">El hilo rojo del destino</h1>
         <section className="prose flex flex-col items-stretch">
           <div className="flex justify-center items-center">
@@ -116,40 +136,46 @@ export default function Thread() {
             rellenad cada campo con el nombre de cada uno donde se indica.
           </p>
 
-          <form className="w-full flex flex-col py-4">
-            <div className="flex justify-around items-center">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="w-full flex flex-col py-2 gap-4"
+          >
+            <div className="flex flex-col justify-start items-stretch gap-4 py-4">
               <div className="flex flex-col items-stretch gap-4">
-                <label htmlFor="nombre-novio">Nombre del él:</label>
+                <label htmlFor="novio">Nombre del él:</label>
                 <input
                   type="text"
-                  name="nombre-novio"
-                  id=""
+                  id="novio"
+                  {...register("novio")}
                   className="bg-white rounded-md p-2"
                 />
               </div>
               <div className="flex flex-col items-stretch gap-4">
-                <label htmlFor="nombre-novia">Nombre del ella:</label>
+                <label htmlFor="novia">Nombre del ella:</label>
                 <input
                   type="text"
-                  name="nombre-novia"
-                  id=""
+                  id="novia"
+                  {...register("novia")}
                   className="bg-white rounded-md p-2"
                 />
               </div>
             </div>
 
-            <button type="submit" className="hover:cursor-pointer">
-              Confirmar
-            </button>
-
-            <footer className="flex justify-center items-center w-full p-8">
-              <a
-                href="/labodadebrunoysusana/your-name"
-                className="border-2 p-4 rounded-4xl hover:bg-sky-700"
+            {!isSubmitted ? (
+              <button
+                type="submit"
+                className="hover:cursor-pointer border-2 p-4 rounded-4xl hover:text-red-400"
               >
-                <span>Siguiente</span>
-              </a>
-            </footer>
+                Confirmar
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="hover:cursor-pointer border-2 p-4 rounded-4xl hover:text-red-400"
+              >
+                Atando un hilo rojo a los novios...
+              </button>
+            )}
           </form>
         </section>
       </section>

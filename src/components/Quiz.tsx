@@ -69,7 +69,7 @@ export default function Quiz() {
             </div>
             <button
               type="submit"
-              className="hover:cursor-pointer border-2 p-4 rounded-4xl hover:bg-sky-700"
+              className="hover:cursor-pointer border-2 p-4 rounded-4xl hover:text-white"
             >
               Confirmar
             </button>
@@ -79,7 +79,7 @@ export default function Quiz() {
 
       <footer className="p-8 flex justify-center items-center">
         <a href="/labodadebrunoysusana/emoji-maps">
-          <span className="border-2 p-4 rounded-4xl hover:bg-sky-700">
+          <span className="border-2 p-4 rounded-4xl hover:text-white">
             Siguiente
           </span>
         </a>

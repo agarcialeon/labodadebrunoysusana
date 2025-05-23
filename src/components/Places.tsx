@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import finger from "../images/finger.png";
 
 const steps = [
@@ -24,13 +24,14 @@ const steps = [
   },
   {
     title: "Kyoto",
-    emojis: ["🏯", "🍂", "🎎", "🌸", "🍵", "⛩️", "🦌", "🗻", "🧧"],
+    emojis: ["🏯", "🍂", "🎎", "🌸", "🍵"], // TODO: Usar emojis extra como pistas "⛩️", "🦌", "🗻", "🧧"
   },
 ];
 
 export default function Places() {
   const [inputs, setInputs] = useState(Array(steps.length).fill(""));
   const [unlockedSteps, setUnlockedSteps] = useState(1);
+  // const [allCorrect, setAllCorrect] = useState(false);
 
   const handleChange = (index: number, value: string) => {
     const newInputs = [...inputs];
@@ -48,15 +49,15 @@ export default function Places() {
   };
 
   const allCorrect = inputs.every(
-    (input, idx) => input.trim() === steps[idx].title
+    (input, idx) => input.trim() === steps[idx].title.toLowerCase()
   );
 
   return (
-    <div className="fluid-column relative flex flex-col gap-8 bg-gradient-to-t from-fuchsia-500 to-cyan-500">
+    <div className="fluid-column relative flex flex-col gap-8 bg-gradient-to-t from-fuchsia-500 to-cyan-500 text-white">
       <div className="bg-white border rounded-2xl w-[64px] absolute right-5 top-5">
         <img src={finger.src} alt="Preguntar al hilo rojo" width={64} />
       </div>
-      <section>
+      <section className="">
         <h1 className="title font-urbanist">🗺️ Aquí y en todas partes</h1>
         <p className="py-2">
           El mito del hilo rojo dice que encontraremos a nuestra persona ideal
@@ -93,7 +94,7 @@ export default function Places() {
             {index < unlockedSteps && (
               <div className="flex flex-col items-stretch gap-4">
                 <h3 className="text-xl">Acertijo {index + 1}</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col items-stretch gap-4 md:grid md:grid-cols-2 md:gap-4">
                   <ul className="flex justify-center items-center">
                     {step.emojis.map((emoji, i) => (
                       <li key={i} className="text-5xl">
@@ -101,7 +102,7 @@ export default function Places() {
                       </li>
                     ))}
                   </ul>
-                  <div className="flex items-center gap-2 text-3xl">
+                  <div className="flex items-center gap-2 text-xl md:text-3xl">
                     <label
                       htmlFor={`respuesta-${index}`}
                       className="font-medium"
@@ -114,7 +115,7 @@ export default function Places() {
                       placeholder="Escribe el nombre exacto"
                       value={inputs[index]}
                       onChange={(e) => handleChange(index, e.target.value)}
-                      className="border-2 bg-white rounded-xl px-2"
+                      className="border-2 bg-white text-black rounded-xl px-2 w-full"
                     />
                   </div>
                 </div>
@@ -122,14 +123,14 @@ export default function Places() {
             )}
           </div>
         ))}
-
         {allCorrect && (
-          <a
-            href="/labodadebrunoysusana/maths"
-            className="text-blue-500 underline mt-4"
-          >
-            Siguiente
-          </a>
+          <section className="pt-8 flex items-center justify-center">
+            <a href="/labodadebrunoysusana/maths">
+              <span className="border-2 p-4 rounded-4xl hover:text-white">
+                Siguiente
+              </span>
+            </a>
+          </section>
         )}
       </section>
     </div>

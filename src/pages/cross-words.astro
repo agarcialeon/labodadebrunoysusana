@@ -1,15 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { ClientRouter } from "astro:transitions";
-import Crosswords from "../components/Crosswords.astro";
+import Crosswords from "../components/Crosswords";
 ---
 
-<Layout title="Bruno boda.">
+<Layout title="Palabras cruzadas | La boda de Bruno y Susana">
   <ClientRouter />
-  <main class="main gradient">
-    <Crosswords />
-    <section>
-      <a href="/labodadebrunoysusana/unlock">Siguiente</a>
-    </section>
-  </main>
+  <Crosswords client:load />
 </Layout>

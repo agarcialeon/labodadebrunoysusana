@@ -1,4 +1,3 @@
----
 // Palabras a buscar
 const words = [
   "FLECHAZO", // Tinder
@@ -29,49 +28,32 @@ const matrix = [
   ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
   ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
 ];
----
 
-<section>
-  <div
-    class="p-32 w-full h-full flex flex-row justify-between items-center gap-8"
-  >
-    <div class="word-search">
-      {matrix.flat().map((letter) => <div class="cell">{letter}</div>)}
-    </div>
+export default function Crosswords() {
+  return (
+    <section className="flex flex-col fluid-column items-stretch gap-8 bg-gradient-to-bl from-lime-400 to-lime-500 w-full h-full">
+      <div className="p-32 w-full h-full flex flex-row justify-between items-center gap-8">
+        <div className="grid grid-cols-[repeat(15,1.5em)] grid-rows-[repeat(15,1.5em)] gap-[0.2em] select-none font-mono">
+          {matrix.flat().map((letter) => (
+            <div className="w-[1.5em] h-[1.5em] flex justify-center items-center border cursor-default border-solid border-[#ccc]">
+              {letter}
+            </div>
+          ))}
+        </div>
 
-    <div>
-      <h3>Fases del amor:</h3>
-      <ul>
-        {words.map((word) => <li>{word}</li>)}
-      </ul>
-    </div>
-  </div>
+        <div>
+          <h3>Fases del amor:</h3>
+          <ul>
+            {words.map((word) => (
+              <li>{word}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
 
-  <a href="/vault">Siguiente</a>
-</section>
-
-<style>
-  .word-search {
-    display: grid;
-    grid-template-columns: repeat(15, 1.5em);
-    grid-template-rows: repeat(15, 1.5em);
-    gap: 0.2em;
-    font-family: monospace;
-    user-select: none;
-  }
-  .cell {
-    width: 1.5em;
-    height: 1.5em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #ccc;
-    cursor: default;
-  }
-  .highlight {
-    background-color: yellow;
-    font-weight: bold;
-  }
-</style>
-
-<script></script>
+      <section>
+        <a href="/labodadebrunoysusana/unlock">Siguiente</a>
+      </section>
+    </section>
+  );
+}

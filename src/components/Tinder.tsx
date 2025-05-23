@@ -33,8 +33,8 @@ export default function Tinder() {
 
   return (
     <section className="flex flex-col items-stretch w-full h-full">
-      <section className="grid grid-cols-2 gap-4 fluid-column bg-gradient-to-t from-amber-200 to-yellow-400">
-        <section className="flex flex-col justify-start items-stretch text-balance">
+      <section className="flex flex-col items-stretch md:grid md:grid-cols-2 gap-4 fluid-column bg-gradient-to-t from-amber-200 to-yellow-400">
+        <section className="flex flex-col justify-start items-stretch text-balance h-full w-full">
           <div className="text-5xl text-white urbanist-900 pb-4">
             Amor a primer match! 💘
           </div>
@@ -289,7 +289,7 @@ export default function Tinder() {
                       className="text-[7px] tracking-[5px] text-[#c0c0c0] no-underline uppercase italic"
                       href="http://themakery.jcink.net"
                     >
-                      Created by HotRixx
+                      Created by HotRixx<span>&#8482;</span>
                     </a>
                   </div>
                 </div>
@@ -301,7 +301,7 @@ export default function Tinder() {
 
       <section className="flex flex-col justify-start items-center w-full">
         <a href="/labodadebrunoysusana/love-and-other-drugs">
-          <span className="border-2 p-4 rounded-4xl hover:bg-sky-700">
+          <span className="border-2 p-4 rounded-4xl hover:text-yellow-700">
             Siguiente
           </span>
         </a>

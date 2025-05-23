@@ -12,9 +12,43 @@ import finger from "../images/finger.png";
   <div class="bg-white border rounded-2xl w-[64px] absolute right-5 top-5">
     <img src={finger.src} alt="Preguntar al hilo rojo" width={64} />
   </div>
+  <header class="flex justify-center items-center">
+    <h1 class="title urbanist-900">😍Amor y otra drogas💊</h1>
+  </header>
+
+  <section class="p-4">
+    <p class="py-2">
+      Como habéis visto el amor nos puede sorprender con cualquier persona con
+      un simple match (o lo que nuestros padres llamarían flechazo). El problema
+      de los flechazos es que a veces no nos dejan ver la realidad y podemos
+      idealizar a las personas perdiéndonos nosotros mismos por el camino al
+      seguir el hilo rojo.
+    </p>
+    <p class="py-2">
+      Por eso mismo, nuestros expertos farmacéuticos han desarrollado un
+      medicamento con métodos experimentales con resultados prometedores para
+      solucionar este problema.
+    </p>
+    <p class="py-2">
+      Aunque en esta ocasión, el problema ha sido el tremendo éxito que ha
+      tenido dicho medicamento, lo que ha provocado la falta de stock. Ante tal
+      situación, y como sois muy majos (y para que os vamos a engañar, es un
+      placebo de manual 😜 😜), os vamos a pasar la receta para que vosotros
+      mismos podáis fabricar el medicamento y así continuar vuestro camino hacia
+      la persona a la que el destino os ha atado.
+    </p>
+    <p class="py-2">
+      Tan sólo tenéis que seguir las instrucciones de nuestro farmaceutico de
+      guardia que amablemente ha apuntado en la siguiente receta, aunque os
+      advertimos de que viendo como funcionamos en HotRiXX<span>&#8482;</span> es
+      casi seguro que se ha estado fumando algo y tengais que poner algo de empeño
+      por vuestra parte para entenderla.
+    </p>
+  </section>
+
   <div class="prescription_form bg-blue-50 border-2 border-gray-500">
-    <div class="flex flex-col justify-start items-stretch p-4">
-      <div class="header">
+    <div class="flex flex-col justify-start items-stretch p-4 gap-[1px]">
+      <div class="header border">
         <div class="w-full flex justify-start items-stretch">
           <img
             src={logoFarmacia.src}
@@ -32,11 +66,7 @@ import finger from "../images/finger.png";
         </div>
       </div>
       <div class="main grid-cols-[50px_1fr]">
-        <div class="aside rotate-90" style="writingMode: 'vertical-rl'">
-          RECÉTA MÉDICA
-        </div>
-
-        <div class="grid grid-cols-6 grid-rows-4 gap-0">
+        <div class="grid grid-cols-6 grid-rows-4 gap-[1px] border-gray-900">
           <div class="col-span-2 row-span-4 border-1 p-2">
             <p>
               <span class="font-semibold">PRESCRIPCIÓN:</span> Lorem, ipsum dolor
@@ -44,26 +74,33 @@ import finger from "../images/finger.png";
               tenetur distinctio, temporibus voluptatem placeat quo eius quam vel
               fuga explicabo ipsam, veritatis natus, incidunt inventore aut quos?
             </p>
-            <p>Núm. envases / unidades:</p>
-            <p>Vía de administración ______________________</p>
+            <p>
+              Vía de administración: _______<span class="underline">Oral</span
+              >_______
+            </p>
           </div>
           <div class="col-span-2 col-start-3 row-start-4 border-1 p-2">
             <div class="flex justify-between items-stretch">
-              <p>Nº de orden dispensación</p>
-              <input type="checkbox" name="" id="" />
+              <p class="w-full flex justify-between items-center">
+                <span> Nº de orden dispensación: </span>
+                <span class="font-bold">#9625</span>
+              </p>
             </div>
-            <div>
-              <p>Fecha prevista</p>
-              <p>_____/_____/________</p>
+            <div class="w-full flex justify-between items-center">
+              <span>Fecha prevista: </span>
+              <span class="underline">20/07/2023</span>
             </div>
           </div>
           <div class="col-span-2 col-start-3 row-span-3 border-1">
             <div class="grid grid-rows-3">
-              <div class="grid grid-rows-1">
-                <p>Duración del tratamiento</p>
+              <div class="flex flex-col items-stretch p-2">
+                <p>Duración del tratamiento:</p>
+                <p class="flex justify-end items-center">
+                  - Hasta finalizar los sintomas -
+                </p>
               </div>
-              <div class="grid grid-rows-1">Posología</div>
-              <div class="grid grid-cols-2 grid-rows-1">
+              <div class="grid grid-rows-1 p-2">Posología</div>
+              <div class="grid grid-cols-2 grid-rows-1 p-2">
                 <div class="grid grid-cols-2 grid-rows-2">
                   <div class="border-1 p-2">Unidades</div>
                   <div class="border-1 p-2">1</div>
@@ -77,42 +114,59 @@ import finger from "../images/finger.png";
             class="col-span-2 row-span-2 col-start-5 row-start-1 border-1 p-2"
           >
             <p>
-              <span class="font-semibold">PACIENTE</span> (Nombre, apellidos, año
-              de nacimiento y nº de DNI / NIE)
+              <span class="font-semibold">PACIENTE</span> (Nombre y apellidos):
             </p>
+            <p>Bruno Flores</p>
           </div>
           <div
             class="col-span-6 row-span-1 col-start-1 row-start-5 border-1 p-2"
           >
-            <p><span class="font-semibold">DIAGNÓSTICO</span> (si procede)</p>
+            <p>
+              <span class="font-semibold">DIAGNÓSTICO</span> (si procede): Sudoración
+              de las manos, fiebre, alteración del ciclo del sueño, sensación de
+              "mariposas en el estómago".
+            </p>
           </div>
           <div
             class="col-span-6 row-span-2 col-start-1 row-start-6 border-1 p-2"
           >
-            <span class="font-semibold">INSTRUCCIONES AL PACIENTE</span> (si procede)
+            <span class="font-semibold">INSTRUCCIONES AL PACIENTE</span> (si procede):
+            Tomar tres dosis diarias de los medicamentos indicados acompañados de
+            comida. Si los sintomas empeoran, añadir una dosis de "chuches" durante
+            la cena.
           </div>
           <div
             class="col-span-2 row-span-2 col-start-5 row-start-3 border-1 p-2"
           >
             <div>
-              <p><span class="font-semibold">PRESCRIPTOR</span></p>
-              <p>Doctor Name:</p>
+              <p>
+                <span class="font-semibold">PRESCRIPTOR </span>(Nombre del
+                médico):
+              </p>
+              <p class="italic w-full flex justify-end items-center">
+                Dr. Emilio Salgado
+              </p>
+              <p class="flex justify-between items-center">
+                <span>Fecha de la prescripción:</span>
+                <span class="underline">20/07/2023</span>
+              </p>
+              <div class="flex flex-col items-stretch">
+                <p>Firma*</p>
 
-              <p>Fecha de la prescripción *: ______/______/_________</p>
-
-              <Image
-                src={medicamento4}
-                class="w-64"
-                title="medicamento"
-                alt="Medicamento 4"
-              />
+                <Image
+                  src={medicamento4}
+                  class="w-64"
+                  title="medicamento"
+                  alt="Medicamento 4"
+                />
+              </div>
             </div>
           </div>
 
           <div
             class="col-span-6 row-span-2 grid grid-cols-3 grid-rows-1 border-1 p-2"
           >
-            <div class="">
+            <div class="p-4">
               <p>
                 La validez de esta receta expira a los 10 días naturales de la
                 fecha prevista para la dispensación, o en su defecto de la fecha
@@ -123,7 +177,7 @@ import finger from "../images/finger.png";
               </p>
             </div>
             <div
-              class="barcode flex flex-col justify-center items-center border-2"
+              class="barcode border-l border-r flex flex-col justify-center items-center"
             >
               <Image
                 src={barcode}
@@ -133,11 +187,20 @@ import finger from "../images/finger.png";
               />
               <p>3N4M0R4M13NT0</p>
             </div>
-            <div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequatur debitis magnam sunt neque commodi quaerat velit quo
-              perferendis, officia illum mollitia asperiores laudantium quod
-              unde ipsum blanditiis tempore. Pariatur, animi.
+            <div class="p-4">
+              <p class="pb-2">
+                El paciente puede comprobar la prescripción del medicamento o
+                medicamentos indicados por el prescriptor en la siguiente página
+                web en caso de pérdida del documento prescriptivo que acompaña a
+                cada medicamento.
+              </p>
+              <p>
+                <a
+                  class="text-teal-700"
+                  href="https://cima.aemps.es/cima/publico/home.html"
+                  >https://cima.aemps.es/cima/publico/home.html</a
+                >
+              </p>
             </div>
           </div>
         </div>
@@ -145,9 +208,10 @@ import finger from "../images/finger.png";
     </div>
   </div>
 
-  <section>
-    <a href="/labodadebrunoysusana/memories">Siguiente</a>
+  <section class="flex items-center justify-center">
+    <a href="/labodadebrunoysusana/memories"
+      ><span class="border-2 p-4 rounded-4xl hover:text-white">Siguiente</span
+      ></a
+    >
   </section>
-
-  <!-- https://cima.aemps.es/cima/publico/lista.html -->
 </section>

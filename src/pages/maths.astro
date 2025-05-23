@@ -6,7 +6,5 @@ import ClientRouter from "astro/components/ClientRouter.astro";
 
 <Layout title="La ecuación del amor | La boda de Bruno y Susana">
   <ClientRouter />
-  <section class="bg-indigo-200">
-    <Graphs client:load transition:animate="fade" />
-  </section>
+  <Graphs client:load transition:animate="fade" />
 </Layout>

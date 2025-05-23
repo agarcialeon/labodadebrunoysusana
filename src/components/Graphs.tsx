@@ -10,7 +10,7 @@ type Inputs = {
   input4: number;
 };
 
-// El código de este juego es la fecha de la boda
+// El código de este juego es la fecha de la boda (7/6/25)
 export default function Graphs() {
   const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
@@ -81,7 +81,7 @@ export default function Graphs() {
       yAxis: { domain: [-1, 9] },
       data: [
         {
-          fn: "1 / x",
+          fn: "1 / x + 7",
         },
       ],
     });
@@ -90,13 +90,13 @@ export default function Graphs() {
       target: "#second",
       width: 250,
       height: 250,
-      xAxis: { domain: [-4, 4] },
-      yAxis: { domain: [-4, 4] },
+      xAxis: { domain: [2, 10] },
+      yAxis: { domain: [2, 10] },
       data: [
         {
           fnType: "parametric",
-          x: "3 * cos(t)",
-          y: "3 * sin(t)",
+          x: "3 * cos(t) + 6",
+          y: "3 * sin(t) + 6",
           graphType: "polyline",
           range: [0, 2 * Math.PI],
         },
@@ -109,7 +109,7 @@ export default function Graphs() {
       height: 250,
       data: [
         {
-          fn: "abs(2x) - 5",
+          fn: "abs(2x) + 2",
         },
       ],
     });
@@ -123,7 +123,7 @@ export default function Graphs() {
       data: [
         {
           fnType: "parametric",
-          x: "-3 * abs(sin(t))",
+          x: "-3 * abs(sin(t)) - 5",
           y: "t",
           graphType: "polyline",
         },
@@ -132,126 +132,152 @@ export default function Graphs() {
   });
 
   return (
-    <section className="flex flex-col relative justify-start items-stretch gap-8 fluid-column">
-      <div className="bg-white border rounded-2xl w-[64px] absolute right-5 top-5">
-        <img src={finger.src} alt="Preguntar al hilo rojo" width={64} />
-      </div>
-      <div className="title urbanist-900">La ecuación del amor</div>
-      <p className="text-center w-full py-4">
-        En la historia de las matemáticas existen tres amores imposibles. Todos
-        ellos dados por una ecuación que define esa relación.
-      </p>
-
-      <div className="flex justify-around items-center">
-        <div className="flex flex-col justify-start items-center gap-4">
-          <div id="parallel"></div>
-          <p>x = 1</p>
-          <p>x = -1</p>
-          <h3>Lineas paralelas</h3>
-          <p>Almas gemelas que nunca están destinadas a encontrarse</p>
+    <section className="flex flex-col relative justify-start items-stretch gap-8 fluid-column bg-indigo-200">
+      <section>
+        <div className="bg-white border-2 rounded-2xl w-[64px] absolute right-5 top-5 hover:bg-gray-100 cursor-pointer">
+          <img src={finger.src} alt="Preguntar al hilo rojo" width={64} />
         </div>
+        <div className="title urbanist-900">La ecuación del amor</div>
+        <p className="text-center w-full py-4">
+          En la historia de las matemáticas existen tres amores imposibles.
+          Todos ellos dados por una ecuación que define esa relación.
+        </p>
+      </section>
 
-        <div className="flex flex-col justify-start items-center gap-4">
-          <div id="asymptote"></div>
-          <p>x = 1</p>
-          <p>x = -1</p>
-          <h3>Asíntota</h3>
-          <p>Cada vez más cerca, pero nunca estarán juntas</p>
-        </div>
-
-        <div className="flex flex-col justify-start items-center gap-4">
-          <div id="tangent"></div>
-          <p>x = 1</p>
-          <p>x = -1</p>
-          <h3>Tangente</h3>
-          <p>Estar juntos una vez, y luego separarse para siempre</p>
-        </div>
-
-        <div className="flex flex-col justify-start items-center gap-4">
-          <div id="sine"></div>
-          <p>y = sin(x)</p>
-          <p>y = cos(x)</p>
-          <h3>Seno y coseno</h3>
-          <p>
-            Nunca sincronizados. Enamorándose y desenamorándose a cada paso.
-          </p>
-        </div>
-      </div>
-
-      <p>
-        Sin embargo, sabemos que el (verdadero) amor no es tan simple y depende
-        de varios factores. Es por eso que para dar con la clave necesitamos más
-        de una ecuación.
-      </p>
-
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex justify-around items-center gap-8">
-          <div className="flex flex-col justify-start items-center gap-4">
-            <div id="first"></div>
-
-            <div className="flex items-center gap-2">
-              <label htmlFor="input1">x =</label>
-              <input
-                type="number"
-                className="form-input bg-white rounded-sm p-2"
-                {...register("input1")}
-              />
-            </div>
+      <section>
+        <div className="flex flex-col items-stretch md:flex-row md:justify-around md:items-center gap-8">
+          <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
+            <div id="parallel"></div>
+            <p>x = 1</p>
+            <p>x = -1</p>
+            <h3>Lineas paralelas</h3>
+            <p className="italic text-balance text-center">
+              "Almas gemelas que nunca están destinadas a encontrarse"
+            </p>
           </div>
 
-          <div className="flex flex-col justify-start items-center gap-4">
-            <div id="second"></div>
-            <div className="flex items-center gap-2">
-              <label htmlFor="input2">x =</label>
-              <input
-                type="number"
-                className="form-input bg-white rounded-sm p-2"
-                {...register("input2")}
-              />
-            </div>
+          <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
+            <div id="asymptote"></div>
+            <p>x = 1</p>
+            <p>x = -1</p>
+            <h3>Asíntota</h3>
+            <p className="italic text-balance text-center">
+              "Cada vez más cerca, pero nunca estarán juntas"
+            </p>
           </div>
 
-          <div className="flex flex-col justify-start items-center gap-4">
-            <div id="third"></div>
-            <div className="flex items-center gap-2">
-              <label htmlFor="input3">x =</label>
-              <input
-                type="number"
-                className="form-input bg-white rounded-sm p-2"
-                {...register("input3")}
-              />
-            </div>
+          <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
+            <div id="tangent"></div>
+            <p>x = 1</p>
+            <p>x = -1</p>
+            <h3>Tangente</h3>
+            <p className="italic text-balance text-center">
+              "Estar juntos una vez, y luego separarse para siempre"
+            </p>
           </div>
 
-          <div className="flex flex-col justify-start items-center gap-4">
-            <div id="fourth"></div>
-
-            <div className="flex items-center gap-2">
-              <label htmlFor="input4">x =</label>
-              <input
-                type="number"
-                className="form-input bg-white rounded-sm p-2"
-                {...register("input4")}
-              />
-            </div>
+          <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
+            <div id="sine"></div>
+            <p>y = sin(x)</p>
+            <p>y = cos(x)</p>
+            <h3>Seno y coseno</h3>
+            <p className="italic text-balance text-center">
+              "Nunca sincronizados. Enamorándose y desenamorándose a cada paso."
+            </p>
           </div>
         </div>
-        <div className="flex justify-center items-center">
-          <button
-            className="border-2 p-4 rounded-4xl hover:bg-sky-700"
-            type="submit"
-          >
-            Confirmar
-          </button>
-        </div>
-      </form>
+      </section>
 
-      <section className="flex flex-col justify-start items-center">
-        <a href="/labodadebrunoysusana/love-and-other-drugs">
-          <span className="border-2 p-4 rounded-4xl hover:bg-sky-700">
-            Siguiente
-          </span>
-        </a>
+      <section className="w-full">
+        <p className="py-2 text-center">
+          Sin embargo, sabemos que el (verdadero) amor no es tan simple y
+          depende de varios factores o variables formando así todas ellas parte
+          de un sistema de ecuaciones.
+        </p>
+        <p className="py-2 text-center">
+          Dar valor a dichas variables nos permitirá mostrar en que momentos a
+          lo largo del hilo rojo tendremos posibilidades de encontrar a nuestro
+          amor verdadero.
+        </p>
+        <p className="py-2 text-center">
+          A continuación os mostramos el sistema de ecuaciones que nuestros
+          matemáticos han estudiado.
+        </p>
+      </section>
+
+      <section className="flex flex-col items-stretch gap-8">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col items-stretch gap-8"
+        >
+          <div className="flex flex-col items-stretch md:flex-row md:justify-around md:items-center gap-8">
+            <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
+              <div id="first"></div>
+
+              <div className="flex items-center gap-2">
+                <label htmlFor="input1">x =</label>
+                <input
+                  type="number"
+                  className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
+                  {...register("input1")}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
+              <div id="second"></div>
+              <div className="flex items-center gap-2">
+                <label htmlFor="input2">x =</label>
+                <input
+                  type="number"
+                  className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
+                  {...register("input2")}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
+              <div id="third"></div>
+              <div className="flex items-center gap-2">
+                <label htmlFor="input3">x =</label>
+                <input
+                  type="number"
+                  className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
+                  {...register("input3")}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
+              <div id="fourth"></div>
+
+              <div className="flex items-center gap-2">
+                <label htmlFor="input4">x =</label>
+                <input
+                  type="number"
+                  className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
+                  {...register("input4")}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center items-center">
+            <button
+              className="border-2 p-4 rounded-4xl hover:text-indigo-400 hover:cursor-pointer"
+              type="submit"
+            >
+              Confirmar
+            </button>
+          </div>
+        </form>
+
+        <section className="flex flex-col justify-start items-center">
+          <a href="/labodadebrunoysusana/match">
+            <span className="border-2 p-4 rounded-4xl hover:text-indigo-400 hover:cursor-pointer">
+              Siguiente
+            </span>
+          </a>
+        </section>
       </section>
     </section>
   );
