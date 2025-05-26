@@ -76,7 +76,11 @@ export default function Origami() {
       </section>
 
       <section>
-        <a href="/labodadebrunoysusana/cross-words">Siguiente</a>
+        <a href="/labodadebrunoysusana/cross-words">
+          <span className="border-2 p-4 rounded-4xl hover:text-white">
+            Siguiente
+          </span>
+        </a>
       </section>
     </section>
   );
