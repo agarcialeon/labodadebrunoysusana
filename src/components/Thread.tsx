@@ -2,21 +2,46 @@ import redThread from "../images/red-thread/red-thread.png";
 import { Infinity } from "lucide-react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { navigate } from "astro:transitions/client";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 
-type Inputs = {
-  novio: string;
-  novia: string;
-};
+const formSchema = z.object({
+  novio: z
+    .string()
+    .refine((val) => typeof val === "string" && val.toLowerCase() === "bruno", {
+      message: `Introduce el nombre correcto del novio`,
+    }),
+  novia: z
+    .string()
+    .refine(
+      (val) => typeof val === "string" && val.toLowerCase() === "susana",
+      { message: `Introduce el nombre correcto de la novia` }
+    ),
+});
+
+type FormSchema = z.infer<typeof formSchema>;
 
 export default function Thread() {
+  const [buttonText, setButtonText] = useState("Confirmar");
+
   const {
     register,
     handleSubmit,
-    formState: { isSubmitted },
-  } = useForm<Inputs>();
+    watch,
+    formState: { errors },
+  } = useForm<FormSchema>({
+    resolver: zodResolver(formSchema),
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+  });
 
-  const onSubmit: SubmitHandler<Inputs> = (inputs) => {
-    console.log(`Atando el hilo rojo a ${inputs.novio} y ${inputs.novia}`);
+  const formValues = watch();
+
+  const onSubmit: SubmitHandler<FormSchema> = (form: FormSchema) => {
+    setButtonText(
+      `Atando el hilo rojo a ${formValues.novio} y ${formValues.novia}...`
+    );
     setTimeout(() => {
       navigate("/labodadebrunoysusana/your-name");
     }, 1000);
@@ -54,7 +79,7 @@ export default function Thread() {
             la cual destaca por su popularidad.
           </p>
 
-          <p className="py-2">
+          <div className="py-2">
             <details
               name="accordion"
               className="w-full select-none border m-2 border-solid"
@@ -62,22 +87,22 @@ export default function Thread() {
               <summary className="cursor-pointer m-2 p-2 ">
                 Pulsa aquí para descubrir la historia detrás de este mito
               </summary>
-              <p className="m-0 p-2 italic">
+              <div className="m-0 p-2 italic">
                 Hace mucho tiempo, un emperador se enteró de que en una de las
                 provincias de su reino vivía una bruja muy poderosa, quien tenía
                 la capacidad de poder ver el hilo rojo del destino y la mandó
                 traer ante su presencia.
-              </p>
-              <p className="m-0 p-2 italic">
+              </div>
+              <div className="m-0 p-2 italic">
                 Cuando la bruja llegó, el emperador le ordenó que buscara el
                 otro extremo del hilo que llevaba atado al dedo corazón y lo
                 llevara ante la que sería su esposa. La bruja accedió a esta
                 petición y comenzó a seguir y seguir el hilo. Esta búsqueda los
                 llevó hasta un mercado, en donde una pobre campesina con una
                 bebé en los brazos ofrecía sus productos.
-              </p>
+              </div>
 
-              <p className="m-0 p-2 italic">
+              <div className="m-0 p-2 italic">
                 Al llegar hasta donde estaba esta campesina, se detuvo frente a
                 ella y la invitó a ponerse de pie. Hizo que el joven emperador
                 se acercara y le dijo: «Aquí termina tu hilo», pero al escuchar
@@ -86,8 +111,8 @@ export default function Thread() {
                 en brazos y la hizo caer, haciendo que la bebé se hiciera una
                 gran herida en la frente, luego ordenó a sus guardias que
                 detuvieran a la bruja y le cortaran la cabeza.
-              </p>
-              <p className="m-0 p-2 italic">
+              </div>
+              <div className="m-0 p-2 italic">
                 Muchos años después, llegó el momento en que este emperador
                 debía casarse y su corte le recomendó que lo mejor fuera que
                 desposara a la hija de un general muy poderoso. El emperador
@@ -101,9 +126,9 @@ export default function Thread() {
                 peculiar en la frente. Era la cicatriz que él mismo había
                 provocado al rechazar su destino años antes. Un destino que la
                 bruja había puesto frente al suyo y que había decidido no creer.
-              </p>
+              </div>
 
-              <p className="m-0 p-2 italic">
+              <div className="m-0 p-2 italic">
                 Llegó el día de la boda, pero sobre todo había llegado el
                 momento de ver por primera vez la cara de su esposa. Ella entro
                 al templo con un hermoso vestido y un velo que la cubría
@@ -112,9 +137,9 @@ export default function Thread() {
                 frente. Era la cicatriz que él mismo había provocado al rechazar
                 su destino años antes. Un destino que la bruja había puesto
                 frente al suyo y que había decidido no creer.
-              </p>
+              </div>
             </details>
-          </p>
+          </div>
 
           <p className="py-2">
             En esta experiencia que hemos creado para vosotros (los novios)
@@ -149,6 +174,9 @@ export default function Thread() {
                   {...register("novio")}
                   className="bg-white rounded-md p-2"
                 />
+                {errors.novio && (
+                  <span className="text-red-400">{errors.novio.message}</span>
+                )}
               </div>
               <div className="flex flex-col items-stretch gap-4">
                 <label htmlFor="novia">Nombre del ella:</label>
@@ -158,24 +186,20 @@ export default function Thread() {
                   {...register("novia")}
                   className="bg-white rounded-md p-2"
                 />
+                {errors.novia && (
+                  <span className="text-red-400">{errors.novia.message}</span>
+                )}
               </div>
             </div>
 
-            {!isSubmitted ? (
+            {
               <button
                 type="submit"
                 className="hover:cursor-pointer border-2 p-4 rounded-4xl hover:text-red-400"
               >
-                Confirmar
+                {buttonText}
               </button>
-            ) : (
-              <button
-                type="button"
-                className="hover:cursor-pointer border-2 p-4 rounded-4xl hover:text-red-400"
-              >
-                Atando un hilo rojo a los novios...
-              </button>
-            )}
+            }
           </form>
         </section>
       </section>

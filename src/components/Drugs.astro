@@ -7,7 +7,7 @@ import finger from "../images/finger.png";
 ---
 
 <section
-  class="fluid-column relative bg-gradient-to-br from-teal-200 to-teal-500"
+  class="fluid-column relative bg-gradient-to-br from-teal-200 to-teal-500 flex flex-col items-stretch gap-8"
 >
   <div class="bg-white border rounded-2xl w-[64px] absolute right-5 top-5">
     <img src={finger.src} alt="Preguntar al hilo rojo" width={64} />
@@ -65,8 +65,10 @@ import finger from "../images/finger.png";
           </div>
         </div>
       </div>
-      <div class="main grid-cols-[50px_1fr]">
-        <div class="grid grid-cols-6 grid-rows-4 gap-[1px] border-gray-900">
+      <div class="main grid-cols-[1fr]">
+        <div
+          class="sm:grid sm:grid-cols-6 sm:grid-rows-4 sm:gap-[1px] border-gray-900"
+        >
           <div class="col-span-2 row-span-4 border-1 p-2">
             <p>
               <span class="font-semibold">PRESCRIPCIÓN:</span> Lorem, ipsum dolor
@@ -164,7 +166,7 @@ import finger from "../images/finger.png";
           </div>
 
           <div
-            class="col-span-6 row-span-2 grid grid-cols-3 grid-rows-1 border-1 p-2"
+            class="col-span-6 row-span-2 sm:grid sm:grid-cols-3 sm:grid-rows-1 border-1 p-2"
           >
             <div class="p-4">
               <p>
@@ -177,7 +179,7 @@ import finger from "../images/finger.png";
               </p>
             </div>
             <div
-              class="barcode border-l border-r flex flex-col justify-center items-center"
+              class="barcode border-t border-b py-2 sm:border-l sm:border-t-0 sm:border-b-0 sm:py-0 sm:px-2 sm:border-r flex flex-col justify-center items-center"
             >
               <Image
                 src={barcode}
@@ -209,9 +211,10 @@ import finger from "../images/finger.png";
   </div>
 
   <section class="flex items-center justify-center">
-    <a href="/labodadebrunoysusana/memories"
-      ><span class="border-2 p-4 rounded-4xl hover:text-white">Siguiente</span
-      ></a
+    <a
+      href="/labodadebrunoysusana/memories"
+      class="border-2 p-4 rounded-4xl hover:text-white"
+      ><span>Siguiente</span></a
     >
   </section>
 </section>

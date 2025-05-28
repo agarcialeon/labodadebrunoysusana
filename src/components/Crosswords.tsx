@@ -300,7 +300,7 @@ const matrix = [
 export default function Crosswords() {
   return (
     <section className="flex flex-col fluid-column items-stretch gap-8 bg-gradient-to-bl from-lime-400 to-lime-500 w-full h-full">
-      <div className="grid grid-cols-2 w-full h-full gap-8">
+      <div className="flex flex-col items-stretch md:grid md:grid-cols-2 w-full h-full gap-8">
         <div className="flex flex-col items-stretch gap-8 w-full h-full">
           <div className="">
             <h1 className="title">🔠 Palabras cruzadas</h1>
@@ -327,14 +327,6 @@ export default function Crosswords() {
               </div>
             </div>
           </div>
-
-          <section className="w-full flex items-center justify-center">
-            <a href="/labodadebrunoysusana/unlock">
-              <span className="border-2 p-4 rounded-4xl hover:text-white">
-                Siguiente
-              </span>
-            </a>
-          </section>
         </div>
 
         <div className="grid grid-cols-[repeat(16,1fr)] grid-rows-[repeat(16,1fr] select-none font-mono border bg-white rounded">
@@ -354,6 +346,15 @@ export default function Crosswords() {
           ))}
         </div>
       </div>
+
+      <section className="w-full flex items-center justify-center">
+        <a
+          href="/labodadebrunoysusana/unlock"
+          className="border-2 p-4 rounded-4xl hover:text-white"
+        >
+          <span>Siguiente</span>
+        </a>
+      </section>
     </section>
   );
 }

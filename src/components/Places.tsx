@@ -53,7 +53,7 @@ export default function Places() {
   );
 
   return (
-    <div className="fluid-column relative flex flex-col gap-8 bg-gradient-to-t from-fuchsia-500 to-cyan-500 text-white">
+    <div className="p-8 sm:fluid-column relative flex flex-col gap-8 bg-gradient-to-t from-fuchsia-500 to-cyan-500 text-white">
       <div className="bg-white border rounded-2xl w-[64px] absolute right-5 top-5">
         <img src={finger.src} alt="Preguntar al hilo rojo" width={64} />
       </div>
@@ -126,7 +126,7 @@ export default function Places() {
         {allCorrect && (
           <section className="pt-8 flex items-center justify-center">
             <a href="/labodadebrunoysusana/maths">
-              <span className="border-2 p-4 rounded-4xl hover:text-white">
+              <span className="border-2 p-4 rounded-4xl text-black hover:text-white">
                 Siguiente
               </span>
             </a>

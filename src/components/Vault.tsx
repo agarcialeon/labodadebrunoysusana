@@ -32,7 +32,7 @@ export default function Vault() {
             💌 El último paso
           </h1>
           <form
-            className="flex flex-col min-w-[50%] gap-y-2 border-2 border-slate-100 rounded-lg p-6"
+            className="flex flex-col min-w-[90%] md:min-w-[50%] gap-y-2 border-2 border-slate-100 rounded-lg p-6"
             onSubmit={handleSubmit(onSubmit)}
           >
             <label className="text-slate-100" htmlFor="novio">

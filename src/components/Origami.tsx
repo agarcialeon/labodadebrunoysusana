@@ -75,11 +75,12 @@ export default function Origami() {
         </div>
       </section>
 
-      <section>
-        <a href="/labodadebrunoysusana/cross-words">
-          <span className="border-2 p-4 rounded-4xl hover:text-white">
-            Siguiente
-          </span>
+      <section className="flex items-center justify-center">
+        <a
+          href="/labodadebrunoysusana/cross-words"
+          className="border-2 p-4 rounded-4xl hover:text-white"
+        >
+          <span>Siguiente</span>
         </a>
       </section>
     </section>

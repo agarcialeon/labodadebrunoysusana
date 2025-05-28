@@ -1,22 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { ClientRouter } from "astro:transitions";
-import Photos from "../components/Photos.astro";
+import Photos from "../components/Photos.tsx";
 ---
 
 <Layout title="Las 7 diferencias | La boda de Bruno y Susana">
   <ClientRouter />
-  <main class="main gradient">
-    <Photos transition:animate="fade" />
-
-    <section>
-      <a href="/labodadebrunoysusana/butterflies">Siguiente</a>
-    </section>
-  </main>
+  <Photos transition:animate="fade" client:load />
 </Layout>
-
-<style>
-  .main {
-    background-color: #202639;
-  }
-</style>
