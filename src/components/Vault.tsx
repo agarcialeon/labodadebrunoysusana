@@ -1,28 +1,89 @@
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import ConfettiExplosion from "react-confetti-blast";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-type Inputs = {
-  novio: string;
-  novia: string;
-  date: string;
-  place: string;
-  password: string; //siquiero
-};
+const weddingDate = new Date("2025-06-07T00:00:00.000Z");
+
+const formSchema = z.object({
+  novio: z.string().refine((val) => val.toLowerCase() === "bruno", {
+    message: `Introduce el nombre correcto del novio`,
+  }),
+  novia: z.string().refine((val) => val.toLowerCase() === "susana", {
+    message: `Introduce el nombre correcto de la novia`,
+  }),
+  date: z
+    .string()
+    .transform((date) => new Date(date))
+    .refine(
+      (date: Date) =>
+        date.getDay() === weddingDate.getDay() &&
+        date.getMonth() === weddingDate.getMonth() &&
+        date.getFullYear() === weddingDate.getFullYear(),
+      {
+        message: `La fecha introducida no es correcta`,
+      }
+    ),
+  place: z
+    .string()
+    .refine((val) => val.toLowerCase() === "iglesia de santiago el real", {
+      message: `Oops! Parece que ese no es el lugar correcto`,
+    }),
+  password: z.string().superRefine((val, ctx) => {
+    if (val.toLowerCase() !== "si quiero") {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Clave incorrecta",
+      });
+      return;
+    }
+
+    if (val !== "SI QUIERO") {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "No pareces muy convencid@, prueba a decirlo con fuerza",
+      });
+    }
+  }),
+  passwordCheck: z.literal(true, {
+    errorMap: () => ({ message: "¿Dudas de última hora?" }),
+  }),
+});
+
+type FormInputSchema = z.input<typeof formSchema>;
+type FormOutputSchema = z.infer<typeof formSchema>;
 
 export default function Vault() {
-  const [isUnlocked] = useState(false);
-  const [isExploding] = useState(true);
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [isExploding, setIsExploding] = useState(false);
 
   const {
     register,
     handleSubmit,
+    getValues,
     watch,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  } = useForm<FormInputSchema, unknown, FormOutputSchema>({
+    defaultValues: {
+      novio: "",
+      novia: "",
+      date: "",
+      place: "",
+      password: "",
+    },
+    resolver: zodResolver(formSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
+  const onSubmit: SubmitHandler<FormOutputSchema> = (
+    data: FormOutputSchema
+  ) => {
+    setIsUnlocked(true);
+    setIsExploding(true);
+  };
 
-  console.log(watch("date")); // watch input value by passing the name of it
+  console.log(watch());
 
   return (
     <div className="flex flex-col items-stretch h-full w-full min-h-dvh bg-gradient-to-t from-blue-800 via-purple-600 to-blue-400">
@@ -43,6 +104,7 @@ export default function Vault() {
               type="text"
               {...register("novio")}
             />
+            {errors.novio && <span>{errors.novio?.message}</span>}
 
             <label className="text-slate-100" htmlFor="novia">
               Introduce el segundo nombre:
@@ -52,6 +114,7 @@ export default function Vault() {
               type="text"
               {...register("novia")}
             />
+            {errors.novia && <span>{errors.novia?.message}</span>}
 
             <label className="text-slate-100" htmlFor="place">
               Introduce el lugar:
@@ -59,27 +122,56 @@ export default function Vault() {
             <select
               className="mt-1 block w-full p-2 bg-white rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
               {...register("place")}
-            />
+            >
+              <option value="">Selecciona una opción</option>
+              <option value="chamberi">🌳🧸🍻🦶🛤️🌟</option>
+              <option value="calle laurel"> 🍷 🍤 🍢 🐘</option>
+              <option value="zamora"> 🌙 ✨ 🏰 💍 👫 👩🏻‍❤️‍💋‍👨🏻</option>
+              <option value="iglesia de santiago el real">⛪🗡️🧑‍🦰🦶🛤️🌟</option>
+              <option value="palacio de la vega">🏰🍾👰🤵🍽️🎉</option>
+              <option value="kyoto">🏯🍂🎎🌸🍵</option>
+            </select>
+            {errors.place && <span>{errors.place?.message}</span>}
 
             <label className="text-slate-100" htmlFor="date">
-              Introduce la clave:
+              Introduce la fecha:
             </label>
             <input
               className="mt-1 block w-full p-2 bg-white rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
               type="date"
               {...register("date")}
             />
-            {errors.date && <span>This field is required</span>}
-            <input
-              id="pass"
-              className="mt-1 block w-full p-2 bg-white rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              type="password"
-              {...register("password")}
-            />
+            {errors.date && <span>{errors.date?.message}</span>}
 
             <div className="flex justify-center items-center gap-2">
-              <input type="checkbox" name="siquiero" id="siquiero" />
-              <label htmlFor="siquiero">Sí quiero</label>
+              {!getValues("password") ||
+              getValues("password") !== "SI QUIERO" ? (
+                <div>
+                  <label htmlFor="password" className="text-slate-100">
+                    Introduce la clave:
+                  </label>
+                  <input
+                    type="text"
+                    {...register("password")}
+                    className="mt-1 block w-full p-2 bg-white rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  ></input>
+                  {errors.password && <span>{errors.password?.message}</span>}
+                </div>
+              ) : (
+                <div className="flex flex-col items-stretch text-center">
+                  <div>
+                    <input type="checkbox" {...register("passwordCheck")} />
+                    <label htmlFor="siquiero" className="ml-1 text-slate-100">
+                      {getValues("password")}
+                    </label>
+                  </div>
+                  <div className="text-slate-100">
+                    {errors.passwordCheck && (
+                      <span>{errors.passwordCheck?.message}</span>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
             <button
