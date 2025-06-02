@@ -4,27 +4,82 @@ import brunoProfilePicture from "../images/tinder/bruno.jpg";
 import allonaProfilePicture from "../images/tinder/allona.jpg";
 import maisoProfilePicture from "../images/tinder/maiso.jpg";
 import victorRubioProfilePicture from "../images/tinder/victor-rubio.jpg";
+import andreaProfilePicture from "../images/tinder/andrea.jpg";
+import tatianaProfilePicture from "../images/tinder/tatiana.jpg";
+import noraProfilePicture from "../images/tinder/nora.png";
+import alvaroProfilePicture from "../images/tinder/alvaro.jpg";
 import { Swiper, SwiperSlide, type SwiperRef } from "swiper/react";
 import { Flame, Heart, Settings, X } from "lucide-react";
 import { MessagesSquare } from "lucide-react";
 import "swiper/css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+
+const correctCandidates = [
+  { index: 1, name: "tatiana" },
+  { index: 2, name: "andrea" },
+  { index: 5, name: "nora" },
+];
+const incorrectCandidates = [
+  { index: 0, name: "pablo" },
+  { index: 3, name: "manuel" },
+  { index: 4, name: "jesus" },
+  { index: 6, name: "victor-m" },
+  { index: 7, name: "victor-r" },
+  { index: 8, name: "alvaro" },
+];
+const matchedCandidate = 9;
 
 export default function Tinder() {
+  const [isSusanaMatched, setIsSusanaMatched] = useState(false);
   const swiperRef = useRef<SwiperRef>(null);
 
-  const matchCandidate = () => {
-    console.log("Candidate matched");
-  };
-
   const acceptCandidate = () => {
-    console.log("Candidate accepted");
-    swiperRef.current?.swiper.slideNext();
+    const swiper = swiperRef.current?.swiper;
+    if (swiper === undefined) {
+      return;
+    }
+
+    if (
+      correctCandidates.find(
+        (candidate) => swiper.activeIndex === candidate.index
+      )
+    ) {
+      swiper.slideNext();
+      return;
+    } else {
+      swiper.slideTo(0, 500);
+    }
   };
 
   const rejectCandidate = () => {
-    console.log("Candidate rejected");
-    swiperRef.current?.swiper.slidePrev();
+    const swiper = swiperRef.current?.swiper;
+    if (swiper === undefined) {
+      return;
+    }
+
+    if (
+      incorrectCandidates.find(
+        (candidate) => swiper.activeIndex === candidate.index
+      )
+    ) {
+      swiper.slideNext();
+      return;
+    } else {
+      swiper.slideTo(0, 500);
+    }
+  };
+
+  const matchCandidate = () => {
+    const swiper = swiperRef.current?.swiper;
+    if (swiper === undefined) {
+      return;
+    }
+
+    if (swiper.activeIndex === matchedCandidate) {
+      setIsSusanaMatched(true);
+    } else {
+      swiper.slideTo(0, 500);
+    }
   };
 
   const showSettings = () => {};
@@ -33,7 +88,7 @@ export default function Tinder() {
 
   return (
     <section className="flex flex-col items-stretch w-full h-full">
-      <section className="flex flex-col items-stretch md:grid md:grid-cols-2 gap-4 fluid-column bg-gradient-to-t from-amber-200 to-yellow-400">
+      <section className="flex flex-col items-stretch md:grid md:grid-cols-2 gap-4 px-8 py-4 bg-gradient-to-t from-amber-200 to-yellow-400">
         <section className="flex flex-col justify-start items-stretch text-balance h-full w-full">
           <div className="text-5xl text-white urbanist-900 pb-4">
             Amor a primer match! 💘
@@ -93,6 +148,65 @@ export default function Tinder() {
             <div className="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -start-[17px] top-[178px] rounded-s-lg"></div>
             <div className="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -end-[17px] top-[142px] rounded-e-lg"></div>
             <div className="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white dark:bg-gray-800">
+              {/** Settings */}
+              <div className="h-full flex flex-col items-stretch bg-white border mx-auto my-0 border-solid border-[#c0c0c0]">
+                <div className="flex flex-row justify-around items-center h-[65px] p-3 border-b-[#c0c0c0] border-b border-solid">
+                  <button onClick={showSettings} className=" cursor-pointer">
+                    <Settings
+                      size={32}
+                      className="text-gray-400 hover:rotate-90 transition-transform hover:text-gray-600 hover:drop-shadow-gray-400"
+                    />
+                  </button>
+
+                  <div className="w-[100px] mx-auto my-0 p-2.5">
+                    <img
+                      className="w-[100px]"
+                      src="https://worldvectorlogo.com/logos/tinder-1.svg"
+                      alt="Tinder Logo"
+                      title="Tinder Logo"
+                    />
+                  </div>
+
+                  <button onClick={showMessages} className="cursor-pointer">
+                    <MessagesSquare
+                      size={32}
+                      className="text-gray-400 hover:text-sky-600 hover:drop-shadow-sm transition-colors"
+                    />
+                  </button>
+                </div>
+
+                <div className="flex flex-col justify-between items-stretch gap-4 h-full p-4">
+                  <div className="w-full h-full flex items-center justify-center relative">
+                    <img
+                      src={brunoProfilePicture.src}
+                      className="rounded-full absolute w-[100px] h-[100px] object-cover aspect-[1]"
+                      title="Avatar"
+                      alt="Avatar de Bruno"
+                    />
+                  </div>
+
+                  <h1 className="text-center font-bold">Bruno Flores</h1>
+
+                  <h2 className="font-semibold">Aficiones:</h2>
+                  <p className="py-4 px-2 border rounded-sm bg-gray-300 border-gray-400">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+                    saepe veniam provident eveniet? Magnam qui quos beatae
+                    quisquam delectus? Itaque eius quisquam porro perferendis
+                    sed aperiam quod magni, cumque dolore?
+                  </p>
+                </div>
+
+                <div className="w-[400px] h-auto relative text-center bg-[#f0f0f0] px-0 py-0.5 top-[60px]">
+                  <a
+                    className="text-[7px] tracking-[5px] text-[#c0c0c0] no-underline uppercase italic"
+                    href="http://themakery.jcink.net"
+                  >
+                    Created by HotRixx<span>&#8482;</span>
+                  </a>
+                </div>
+              </div>
+
+              {/** Slider */}
               <div className="h-full flex flex-col items-stretch bg-white border mx-auto my-0 border-solid border-[#c0c0c0]">
                 <div className="flex flex-row justify-around items-center h-[65px] p-3 border-b-[#c0c0c0] border-b border-solid">
                   <button onClick={showSettings} className=" cursor-pointer">
@@ -136,7 +250,7 @@ export default function Tinder() {
                           src={pabloProfilePicture.src}
                           className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
                           title="Avatar"
-                          alt="Avatar de Pablo."
+                          alt="Avatar de Pablo"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                         <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
@@ -145,6 +259,159 @@ export default function Tinder() {
                           </div>
                           <div className="tinfo">
                             Me encantan los paseos en bici y hacer snowboard.
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide id="slide-1">
+                        <img
+                          src={tatianaProfilePicture.src}
+                          className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
+                          title="Avatar"
+                          alt="Avatar de Tatiana"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                        <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
+                          <div className="text-xl float-left py-2">
+                            Tatiana, <span className="age">32</span>
+                          </div>
+                          <div className="tinfo">
+                            Me encantan los paseos, los animales, etc...
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide id="slide-1">
+                        <img
+                          src={andreaProfilePicture.src}
+                          className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
+                          title="Avatar"
+                          alt="Avatar de Andrea"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                        <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
+                          <div className="text-xl float-left py-2">
+                            Andrea, <span className="age">29</span>
+                          </div>
+                          <div className="tinfo">
+                            Me encantan los paseos, los animales, etc...
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide
+                        id="slide-5"
+                        className="snap-start shrink-0 w-[350px] h-[350px] origin-[center_center] transition-transform duration-[0.5s] relative mr-[50px] scale-100"
+                      >
+                        <img
+                          src={maisoProfilePicture.src}
+                          className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
+                          title="Avatar"
+                          alt="Avatar de Manuel"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                        <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
+                          <div className="text-xl float-left py-2">
+                            Manuel Maiso, <span className="age">32</span>
+                          </div>
+                          <div className="tinfo">
+                            Me encantan los paseos en bici y hacer snowboard.
+                          </div>
+                        </div>
+                      </SwiperSlide>
+
+                      <SwiperSlide
+                        id="slide-4"
+                        className="snap-start shrink-0 w-[350px] h-[350px] origin-[center_center] transition-transform duration-[0.5s] relative mr-[50px] scale-100"
+                      >
+                        <img
+                          src={allonaProfilePicture.src}
+                          className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
+                          title="Avatar"
+                          alt="Avatar de Jesús"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                        <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
+                          <div className="text-xl float-left py-2">
+                            Jesús Allona, <span className="age">32</span>
+                          </div>
+                          <div className="tinfo">
+                            Me encantan los paseos en bici y hacer snowboard.
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide id="slide-1">
+                        <img
+                          src={noraProfilePicture.src}
+                          className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
+                          title="Avatar"
+                          alt="Avatar de Nora"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                        <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
+                          <div className="text-xl float-left py-2">
+                            Nora Olazabal, <span className="age">32</span>
+                          </div>
+                          <div className="tinfo">
+                            Me encantan los paseos, los animales, etc...
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide
+                        id="slide-3"
+                        className="snap-start shrink-0 w-[350px] h-[350px] origin-[center_center] transition-transform duration-[0.5s] relative mr-[50px] scale-100"
+                      >
+                        <img
+                          src={brunoProfilePicture.src}
+                          className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
+                          title="Avatar"
+                          alt="Avatar de Victor M."
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                        <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
+                          <div className="text-xl float-left py-2">
+                            Victor Martínez, <span className="age">32</span>
+                          </div>
+                          <div className="tinfo">
+                            Disfruto de mi tiempo con mi moto.
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide
+                        id="slide-6"
+                        className="snap-start shrink-0 w-[350px] h-[350px] origin-[center_center] transition-transform duration-[0.5s] relative mr-[50px] scale-100"
+                      >
+                        <img
+                          src={victorRubioProfilePicture.src}
+                          className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
+                          title="Avatar"
+                          alt="Avatar de Victor Rubio."
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                        <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
+                          <div className="text-xl float-left py-2">
+                            Victor Rubio, <span className="age">32</span>
+                          </div>
+                          <div className="tinfo">
+                            Yonki de los escape rooms, los gatitos y el gym.
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide
+                        id="slide-6"
+                        className="snap-start shrink-0 w-[350px] h-[350px] origin-[center_center] transition-transform duration-[0.5s] relative mr-[50px] scale-100"
+                      >
+                        <img
+                          src={alvaroProfilePicture.src}
+                          className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
+                          title="Avatar"
+                          alt="Avatar de Álvaro"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                        <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
+                          <div className="text-xl float-left py-2">
+                            Álvaro García, <span className="age">32</span>
+                          </div>
+                          <div className="tinfo">
+                            Apasionado de la tecnología, friki de los
+                            videojuegos y jugador de pádel en mi tiempo libre.
                           </div>
                         </div>
                       </SwiperSlide>
@@ -166,86 +433,6 @@ export default function Tinder() {
                           <div className="tinfo">
                             Fan de los pantocrátores, Harry Potter y los
                             perritos.
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                      <SwiperSlide
-                        id="slide-3"
-                        className="snap-start shrink-0 w-[350px] h-[350px] origin-[center_center] transition-transform duration-[0.5s] relative mr-[50px] scale-100"
-                      >
-                        <img
-                          src={brunoProfilePicture.src}
-                          className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
-                          title="Avatar"
-                          alt="Avatar de Bruno."
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
-                        <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
-                          <div className="text-xl float-left py-2">
-                            Bruno Flores, <span className="age">32</span>
-                          </div>
-                          <div className="tinfo">
-                            Me encantan los paseos en bici y hacer snowboard.
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                      <SwiperSlide
-                        id="slide-4"
-                        className="snap-start shrink-0 w-[350px] h-[350px] origin-[center_center] transition-transform duration-[0.5s] relative mr-[50px] scale-100"
-                      >
-                        <img
-                          src={allonaProfilePicture.src}
-                          className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
-                          title="Avatar"
-                          alt="Avatar de Jesús."
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
-                        <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
-                          <div className="text-xl float-left py-2">
-                            Jesús Allona, <span className="age">32</span>
-                          </div>
-                          <div className="tinfo">
-                            Me encantan los paseos en bici y hacer snowboard.
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                      <SwiperSlide
-                        id="slide-5"
-                        className="snap-start shrink-0 w-[350px] h-[350px] origin-[center_center] transition-transform duration-[0.5s] relative mr-[50px] scale-100"
-                      >
-                        <img
-                          src={maisoProfilePicture.src}
-                          className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
-                          title="Avatar"
-                          alt="Avatar de Manuel."
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
-                        <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
-                          <div className="text-xl float-left py-2">
-                            Manuel Maiso, <span className="age">32</span>
-                          </div>
-                          <div className="tinfo">
-                            Me encantan los paseos en bici y hacer snowboard.
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                      <SwiperSlide
-                        id="slide-6"
-                        className="snap-start shrink-0 w-[350px] h-[350px] origin-[center_center] transition-transform duration-[0.5s] relative mr-[50px] scale-100"
-                      >
-                        <img
-                          src={victorRubioProfilePicture.src}
-                          className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
-                          title="Avatar"
-                          alt="Avatar de Victor Rubio."
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
-                        <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
-                          <div className="text-xl float-left py-2">
-                            Victor Rubio, <span className="age">32</span>
-                          </div>
-                          <div className="tinfo">
-                            Yonki de los escape rooms, los gatitos y el gym.
                           </div>
                         </div>
                       </SwiperSlide>
@@ -295,14 +482,16 @@ export default function Tinder() {
             </div>
           </div>
 
-          <section className="flex flex-col justify-start items-center w-full">
-            <a
-              href="/labodadebrunoysusana/love-and-other-drugs"
-              className="border-2 p-4 rounded-4xl hover:text-yellow-700"
-            >
-              <span>Siguiente</span>
-            </a>
-          </section>
+          {isSusanaMatched && (
+            <section className="flex flex-col justify-start items-center w-full">
+              <a
+                href="/labodadebrunoysusana/love-and-other-drugs"
+                className="border-2 p-4 rounded-4xl hover:text-yellow-700"
+              >
+                <span>Siguiente</span>
+              </a>
+            </section>
+          )}
         </section>
       </section>
     </section>
