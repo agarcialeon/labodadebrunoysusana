@@ -9,6 +9,8 @@ import andreaProfilePicture from "../images/tinder/andrea.jpg";
 import tatianaProfilePicture from "../images/tinder/tatiana.jpg";
 import noraProfilePicture from "../images/tinder/nora.png";
 import alvaroProfilePicture from "../images/tinder/alvaro.jpg";
+import cristianProfilePicture from "../images/tinder/cristian.jpg";
+
 import { Swiper, SwiperSlide, type SwiperRef } from "swiper/react";
 import { Flame, Heart, Settings, X } from "lucide-react";
 import { MessagesSquare } from "lucide-react";
@@ -27,8 +29,9 @@ const incorrectCandidates = [
   { index: 6, name: "victor-m" },
   { index: 7, name: "victor-r" },
   { index: 8, name: "alvaro" },
+  { index: 9, name: "cristian" },
 ];
-const matchedCandidate = 9;
+const matchedCandidate = 10;
 
 export default function Tinder() {
   const [isSusanaMatched, setIsSusanaMatched] = useState(false);
@@ -205,7 +208,9 @@ export default function Tinder() {
                               Pablo Escobar, <span className="age">32</span>
                             </div>
                             <div className="tinfo">
-                              Me encantan los paseos en bici y hacer snowboard.
+                              De pequeño metió los dedos en un enchufe y salió
+                              pelirrojo. Trafica con código, manías y una
+                              obsesión por no pasar calor.
                             </div>
                           </div>
                         </SwiperSlide>
@@ -294,10 +299,11 @@ export default function Tinder() {
                           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                           <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
                             <div className="text-xl float-left py-2">
-                              Nora Olazabal, <span className="age">32</span>
+                              Nora Olazabal, <span className="age">26</span>
                             </div>
                             <div className="tinfo">
-                              Me encantan los paseos, los animales, etc...
+                              Doy clase, cuido plantas que no sé si sobrevivirán
+                              y tropezar con estilo es mi especialidad.
                             </div>
                           </div>
                         </SwiperSlide>
@@ -356,11 +362,33 @@ export default function Tinder() {
                           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                           <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
                             <div className="text-xl float-left py-2">
-                              Álvaro García, <span className="age">32</span>
+                              Álvaro, <span className="age">32</span>
                             </div>
                             <div className="tinfo">
                               Apasionado de la tecnología, friki de los
                               videojuegos y jugador de pádel en mi tiempo libre.
+                            </div>
+                          </div>
+                        </SwiperSlide>
+                        <SwiperSlide
+                          id="slide-6"
+                          className="snap-start shrink-0 w-[350px] h-[350px] origin-[center_center] transition-transform duration-[0.5s] relative mr-[50px] scale-100"
+                        >
+                          <img
+                            src={alvaroProfilePicture.src}
+                            className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
+                            title="Avatar"
+                            alt="Avatar de Cristian"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                          <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
+                            <div className="text-xl float-left py-2">
+                              Cristian, <span className="age">39</span>
+                            </div>
+                            <div className="tinfo">
+                              Profesor de primaria frustrado, músico y ex-tenor
+                              de renombre en "Las abelardas" Maniático del orden
+                              y la caligrafía.
                             </div>
                           </div>
                         </SwiperSlide>
