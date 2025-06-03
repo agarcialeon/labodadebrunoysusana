@@ -1,0 +1,17 @@
+---
+import "../styles/global.css";
+import brokenLove from '../images/404-love.png';
+---
+
+<section class="h-full w-full bg-gradient-to-b from-rose-400 to-neutral-50">
+    <div class="text-center max-w-lg p-6 flex flex-col items-stretch md:grid md:grid-cols-2 gap-8">
+      <div class="h-full w-full"><img src={brokenLove.src} class="w-[250px]" alt="Amor no encontrado" /></div>
+      <div class="flex flex-col items-stretch justify-between gap-8 h-full w-full">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">Oops! Amor no encontrado</h1>
+        <p class="text-lg text-gray-600 mb-4">Parece que la ruta que buscas no ha encontrado su página perfecta...</p>
+        <a href="/labodadebrunoysusana" class="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+          Volver al inicio
+        </a>
+      </div>
+  </div>
+</section>

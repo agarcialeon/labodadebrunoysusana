@@ -8,10 +8,10 @@ import { Play } from "@lucide/astro";
   <canvas id="sky" class="absolute z-0"></canvas>
 
   <section
-    class="text-slate-100 z-1 w-5/6 h-full m-2 md:m-auto p-4 md:w-[50%] md:h-[70%] isolate aspect-video rounded-xl bg-white/20 shadow-lg ring-1 ring-black/5"
+    class="text-slate-100 z-1 w-5/6 h-full m-2 md:m-auto p-4 md:h-[70%] isolate aspect-video rounded-xl bg-white/20 shadow-lg ring-1 ring-black/5"
   >
     <section
-      class="flex flex-col justify-start items-stretch gap-4 text-slate-50"
+      class="h-full flex flex-col justify-between items-stretch gap-4 text-slate-50"
     >
       <h1 class="text-4xl md:text-6xl text-center">Bienvenidos</h1>
 
@@ -23,46 +23,23 @@ import { Play } from "@lucide/astro";
         </p>
 
         <p class="my-3">
-          Para que la experiencia sea más inmersiva, os rogamos que sigais las
-          recomendaciones que encontrareis en los apartados en el lateral de
-          esta sección.
+          Para que la experiencia sea más inmersiva, os damos las siguientes recomendaciones:
         </p>
+
+        <ul class="list-disc px-8 py-4">
+          <li class="py-2">Esta web ha sido pensada para ser visualizada tanto en dispositivos
+          de sobremesa (PC/portátil) como dispositivos móviles. Aún así, se
+          recomienda usar ordenador portátil o similar para ajustar mejor el contenido de la web a la
+          experiencia inicialmente diseñada.</li>
+          <li class="py-2">Se recomienda activar el sonido de vuestro dispositivo puesto que
+          esta página incluye sonidos y música ambiente que acompaña al
+          contenido de la historia.</li>
+          <li class="py-2">Relajaos y poneros cómodos. Podéis prepararos algo de picar, aunque la experiencia ya incluye chucherias como habréis visto al abrir la caja.</li>
+        </ul>
 
         <p class="my-4">
-          Cuando estéis listos, empezad la historia pulsando en el siguiente
-          botón.
+          Cuando estéis listos, empezad la experiencia pulsando en el botón comenzar.
         </p>
-      </section>
-
-      <section>
-        <h2 class="text-2xl text-slate-100">Recomendaciones</h2>
-        <details name="accordion">
-          <summary>Sonido</summary>
-          <span
-            >Se recomienda activar el sonido de vuestro dispositivo puesto que
-            esta página incluye sonidos y música ambiente que acompaña al
-            contenido de la historia.
-          </span>
-        </details>
-        <details name="accordion">
-          <summary>Entorno</summary>
-          <span
-            >Relajaos y poneros cómodos, por ejemplo sentandoos en el sofá, en
-            el suelo junto a una mesa. Podéis prepararos unas palomitas o
-            incluso un helado o batido calentido dependiendo de la estación del
-            año.
-          </span>
-        </details>
-        <details name="accordion">
-          <summary>Dispositivo</summary>
-          <span
-            >Esta web ha sido pensada para ser visualizada tanto en dispositivos
-            de sobremesa (PC/portátil) como dispositivos móviles. Aún así, se
-            recomienda usar un dispositivo con un tamaño de pantalla de al menos
-            XXXX x XXXX para ajustar mejor el contenido de la web a la
-            experiencia inicialmente diseñada.
-          </span>
-        </details>
       </section>
 
       <a
@@ -70,7 +47,7 @@ import { Play } from "@lucide/astro";
         href="/labodadebrunoysusana/red-thread"
       >
         <span class="flex justify-center items-center gap-2">
-          <Play /> Comenzar</span
+          <Play />Comenzar</span
         ></a
       >
     </section>

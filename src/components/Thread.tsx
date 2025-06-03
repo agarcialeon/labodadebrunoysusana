@@ -43,7 +43,7 @@ export default function Thread() {
       `Atando el hilo rojo a ${formValues.novio} y ${formValues.novia}...`
     );
     setTimeout(() => {
-      navigate("/labodadebrunoysusana/your-name");
+      navigate("/labodadebrunoysusana/emoji-maps");
     }, 1000);
   };
 
