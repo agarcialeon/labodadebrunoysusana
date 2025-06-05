@@ -122,8 +122,15 @@ export default function Tinder() {
             nuestra app no sean del todo acordes con tu personalidad. De todas
             formas, como en todo esto del amor, nuestra recomendación es guiarse
             por
+            <span className="font-bold mx-1">
+              la intuición, el corazón o la vista,
+            </span>
+            pero siempre acorde con nuestras preferencias o gustos.
+          </p>
+          <p className="py-4">
             <span className="font-bold">
-              la intuición, el corazón o la vista.
+              A continuación te dejamos algúnas pautas como guía de uso de
+              nuestra app.
             </span>
           </p>
           <p className="py-4">
@@ -140,10 +147,6 @@ export default function Tinder() {
             <li>
               - Si en cualquier momento deseas comprobar tus ajustes de usuario,
               pulsa sobre el engranaje de la barra superior.
-            </li>
-            <li>
-              - Y si quieres ver tus mensajes con otros usuarios, pulsa sobre el
-              botón de la esquina superior derecha.
             </li>
           </ul>
         </section>
@@ -177,11 +180,8 @@ export default function Tinder() {
                       />
                     </div>
 
-                    <button onClick={showMessages} className="cursor-pointer">
-                      <MessagesSquare
-                        size={32}
-                        className="text-gray-400 hover:text-sky-600 hover:drop-shadow-sm transition-colors"
-                      />
+                    <button onClick={showMessages}>
+                      <MessagesSquare size={32} className="text-gray-200" />
                     </button>
                   </div>
 
@@ -209,7 +209,7 @@ export default function Tinder() {
                             </div>
                             <div className="tinfo">
                               De pequeño metió los dedos en un enchufe y salió
-                              pelirrojo. Trafica con código, manías y una
+                              pelirrojo. Trafico con código, manías y una
                               obsesión por no pasar calor.
                             </div>
                           </div>
@@ -227,7 +227,9 @@ export default function Tinder() {
                               Tatiana, <span className="age">32</span>
                             </div>
                             <div className="tinfo">
-                              Me encantan los paseos, los animales, etc...
+                              Adepta al senderismo, el reggeaton, y la novela
+                              negra o de ciencia ficción. Si me quieres
+                              conquistar llévame a ver amaneceres.
                             </div>
                           </div>
                         </SwiperSlide>
@@ -244,7 +246,9 @@ export default function Tinder() {
                               Andrea, <span className="age">29</span>
                             </div>
                             <div className="tinfo">
-                              Me encantan los paseos, los animales, etc...
+                              Aficionada a los juegos de mesa, la lectura
+                              romantica o de fantasía. Adepta al sushi y los
+                              helados.
                             </div>
                           </div>
                         </SwiperSlide>
@@ -264,7 +268,10 @@ export default function Tinder() {
                               Manuel Maiso, <span className="age">32</span>
                             </div>
                             <div className="tinfo">
-                              Me encantan los paseos en bici y hacer snowboard.
+                              Entusiasta el rock and roll. Amigo de mis amigos.
+                              Soy portero de fútbol sala y no dejo pasar ni una.
+                              Pero si me lo pides con amabilidad puedo hacer una
+                              excepción 😈.
                             </div>
                           </div>
                         </SwiperSlide>
@@ -280,12 +287,36 @@ export default function Tinder() {
                             alt="Avatar de Jesús"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                          <div className="flex justify-end items-start p-2 text-md absolute w-full h-full">
+                            <span className="inline-flex items-center justify-center w-6 h-6 me-2 text-sm font-semibold text-blue-800 bg-blue-100 rounded-full dark:bg-gray-700 dark:text-blue-400">
+                              <svg
+                                className="w-4 h-4 text-yellow-300"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path
+                                  className="text-yellow-500"
+                                  fill="currentColor"
+                                  d="m18.774 8.245-.892-.893a1.5 1.5 0 0 1-.437-1.052V5.036a2.484 2.484 0 0 0-2.48-2.48H13.7a1.5 1.5 0 0 1-1.052-.438l-.893-.892a2.484 2.484 0 0 0-3.51 0l-.893.892a1.5 1.5 0 0 1-1.052.437H5.036a2.484 2.484 0 0 0-2.48 2.481V6.3a1.5 1.5 0 0 1-.438 1.052l-.892.893a2.484 2.484 0 0 0 0 3.51l.892.893a1.5 1.5 0 0 1 .437 1.052v1.264a2.484 2.484 0 0 0 2.481 2.481H6.3a1.5 1.5 0 0 1 1.052.437l.893.892a2.484 2.484 0 0 0 3.51 0l.893-.892a1.5 1.5 0 0 1 1.052-.437h1.264a2.484 2.484 0 0 0 2.481-2.48V13.7a1.5 1.5 0 0 1 .437-1.052l.892-.893a2.484 2.484 0 0 0 0-3.51Z"
+                                />
+                                <path
+                                  fill="#fff"
+                                  d="M8 13a1 1 0 0 1-.707-.293l-2-2a1 1 0 1 1 1.414-1.414l1.42 1.42 5.318-3.545a1 1 0 0 1 1.11 1.664l-6 4A1 1 0 0 1 8 13Z"
+                                />
+                              </svg>
+                              <span className="sr-only">Usuario premium</span>
+                            </span>
+                          </div>
                           <div className="flex flex-col justify-end items-stretch p-4 text-md absolute w-full h-full text-white">
                             <div className="text-xl float-left py-2">
-                              Jesús Allona, <span className="age">32</span>
+                              Jesús Allona, <span className="age">33</span>
                             </div>
                             <div className="tinfo">
-                              Me encantan los paseos en bici y hacer snowboard.
+                              Soy un tío sin pelos en la lengua. Tengo un
+                              ejercito de alumnos a mis espaldas y no me importa
+                              usarlo para hacer maldades.
                             </div>
                           </div>
                         </SwiperSlide>
@@ -323,7 +354,10 @@ export default function Tinder() {
                               Victor Martínez, <span className="age">32</span>
                             </div>
                             <div className="tinfo">
-                              Disfruto de mi tiempo con mi moto.
+                              Me gustan las motos, los videojuegos, la
+                              naturaleza y los paisajes. También me apasiona ver
+                              alguna serie y escuchar música. Nada de reggeaton
+                              pls.
                             </div>
                           </div>
                         </SwiperSlide>
@@ -365,8 +399,9 @@ export default function Tinder() {
                               Álvaro, <span className="age">32</span>
                             </div>
                             <div className="tinfo">
-                              Apasionado de la tecnología, friki de los
-                              videojuegos y jugador de pádel en mi tiempo libre.
+                              "Koka" para los amigos. Viciado a las galletas
+                              lotus y los videojuegos. Jugador de pádel en horas
+                              bajas.
                             </div>
                           </div>
                         </SwiperSlide>
@@ -375,7 +410,7 @@ export default function Tinder() {
                           className="snap-start shrink-0 w-[350px] h-[350px] origin-[center_center] transition-transform duration-[0.5s] relative mr-[50px] scale-100"
                         >
                           <img
-                            src={alvaroProfilePicture.src}
+                            src={cristianProfilePicture.src}
                             className="absolute w-[350px] h-[350px] object-cover aspect-[1]"
                             title="Avatar"
                             alt="Avatar de Cristian"
@@ -408,8 +443,8 @@ export default function Tinder() {
                               Susana, <span className="age">32</span>
                             </div>
                             <div className="tinfo">
-                              Fan de los pantocrators, Harry Potter y los
-                              perritos.
+                              Fan del sushi, Harry Potter y el arte románico.
+                              También me encantan los animales.
                             </div>
                           </div>
                         </SwiperSlide>
@@ -419,16 +454,16 @@ export default function Tinder() {
                     <div className="flex justify-between items-center relative">
                       <button
                         onClick={rejectCandidate}
-                        className="cursor-pointer flex justify-center items-center transition-colors bg-white h-[64px] w-[64px] relative rounded-full border-2 border-solid border-[#f0f0f0]"
+                        className="cursor-pointer flex justify-center items-center transition-colors bg-white h-[64px] w-[64px] relative rounded-full border-2 border-solid border-[#f0f0f0] hover:border-red-500"
                       >
                         <X
-                          className="text-red-500  transition-colors"
+                          className="text-red-500 transition-colors"
                           size={64}
                         />
                       </button>
                       <button
                         onClick={matchCandidate}
-                        className="cursor-pointer flex justify-center items-center bg-white h-[50px] w-[50px] relative rounded-full border-2 border-solid border-[#f0f0f0]"
+                        className="cursor-pointer flex justify-center items-center bg-white h-[50px] w-[50px] relative rounded-full border-2 border-solid border-[#f0f0f0] hover:border-amber-500"
                       >
                         <Flame
                           className="fill-amber-500 text-white transition-colors"
@@ -437,7 +472,7 @@ export default function Tinder() {
                       </button>
                       <button
                         onClick={acceptCandidate}
-                        className="cursor-pointer  bg-white flex justify-center items-center h-[64px] w-[64px] relative rounded-full border-2 border-solid border-[#f0f0f0]"
+                        className="cursor-pointer  bg-white flex justify-center items-center h-[64px] w-[64px] relative rounded-full border-2 border-solid border-[#f0f0f0] hover:border-green-500"
                       >
                         <Heart
                           className="fill-green-500 text-white transition-colors"
@@ -501,7 +536,9 @@ export default function Tinder() {
                     <h2 className="font-semibold">Gustos:</h2>
                     <p className="py-4 px-2 border rounded-sm bg-gray-100 text-sm border-gray-400">
                       Chicas, a ser posible morenas, a las que les gusten los
-                      animales, la historia y viajar.
+                      animales, los juegos de mesa y viajar. También me encanta
+                      el sushi, ver series y jugar a videojuegos. La música
+                      indie es lo mío.
                     </p>
 
                     <h2 className="font-semibold">Busco:</h2>
@@ -525,7 +562,12 @@ export default function Tinder() {
           </div>
 
           {isSusanaMatched && (
-            <section className="flex flex-col justify-start items-center w-full">
+            <section className="flex flex-col justify-start items-center w-full gap-3">
+              <h2 className="text-xl">
+                Wow! Menudo
+                <span className="mx-1 uppercase">flechazo</span>
+                no?!
+              </h2>
               <a
                 href="/labodadebrunoysusana/love-and-other-drugs"
                 className="border-2 p-4 rounded-4xl hover:text-yellow-700"
