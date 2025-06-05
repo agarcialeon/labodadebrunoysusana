@@ -138,10 +138,65 @@ export default function Origami() {
             </div>
           </div>
         </div>
+
+        <p>
+          NOTA: Las flechas colocadas entre los pasos indican que hay que dar la
+          vuelta a la hoja de papel para continuar.
+        </p>
       </section>
 
       <section>
-        <p className="p-4">Ahora intercambiad vuestras mariposas y</p>
+        <p className="p-4">
+          Ahora intercambiad vuestras mariposas y escribid las siguientes letras
+          en las puntas de la mariposa del otro.
+        </p>
+        <p>
+          <div className="grid grid-rows-2 grid-cols-8 gap-4 font-bold text-3xl text-center">
+            <div>一</div>
+            <div>十三</div>
+            <div>十五</div>
+            <div>十八</div>
+
+            <div>十八</div>
+            <div>五</div>
+            <div>一</div>
+            <div>十二</div>
+
+            <div>(ichi)</div>
+            <div>(jūsan)</div>
+            <div>(jūgo)</div>
+            <div>(jūhachi)</div>
+
+            <div>(jūhachi)</div>
+            <div>(go)</div>
+            <div>(ichi)</div>
+            <div>(jūni)</div>
+          </div>
+        </p>
+      </section>
+
+      <section>
+        <p className="p-4">
+          Una vez escritas, las letras, decid en alto las palabras san - san -
+          ku - do tres veces y devolved la mariposa a la otra persona.
+          Finalmente debéis buscar el significado de cada letra que teneis
+          escrita en vuestra mariposa. Pista: Los caracteres se pueden copiar.
+          Con la traducción de esos caracteres debéis encontrar su lugar en la
+          cadena de letras que usamos para dar sentido a las palabras (pero
+          claro está en nuestro idioma).
+        </p>
+
+        <p className="p-4">
+          Cuando lo tengáis escribid su significado en los campos de texto a
+          continuación:
+        </p>
+
+        <div>
+          <label htmlFor="mecho"></label>
+          <input type="text" id="mecho" defaultValue={""} />
+          <label htmlFor="ocho"></label>
+          <input type="text" id="ocho" defaultValue={""} />
+        </div>
       </section>
 
       <section className="flex items-center justify-center">
