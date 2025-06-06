@@ -1,5 +1,5 @@
 import functionPlot from "function-plot";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import finger from "../images/finger.png";
 
@@ -8,12 +8,19 @@ type Inputs = {
   input2: number;
   input3: number;
   input4: number;
+  input5: number;
+  input6: number;
+  input7: number;
+  input8: number;
 };
 
 // El código de este juego es la fecha de la boda (7/6/25)
 export default function Graphs() {
-  const { register, handleSubmit } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const { register, handleSubmit, watch } = useForm<Inputs>();
+  const [nextStepVisible, setNextStepVisible] = useState(false)
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    setNextStepVisible(data.input1 == 0 && data.input2 == 7 && data.input3 == 2 && data.input4 == 2 && data.input5 == -6 && data.input6 == 2 && data.input7 == -9 && data.input8 == 5);
+  };
 
   useEffect(() => {
     functionPlot({
@@ -73,12 +80,18 @@ export default function Graphs() {
     });
 
     // LOVE
+
+
+    renderGraphs({ input1: -1, input2: -1, input3: 2, input4: 2, input5: -6, input6: -2, input7: -7, input8: 3 })
+  });
+
+  const renderGraphs = (value: Inputs) => {
     functionPlot({
       target: "#first",
       width: 250,
       height: 250,
-      xAxis: { domain: [-1, 9] },
-      yAxis: { domain: [-1, 9] },
+      xAxis: { domain: [value.input1 ?? -1, 9] },
+      yAxis: { domain: [value.input2 ?? -1, 9] },
       data: [
         {
           fn: "1 / x + 7",
@@ -90,8 +103,8 @@ export default function Graphs() {
       target: "#second",
       width: 250,
       height: 250,
-      xAxis: { domain: [2, 10] },
-      yAxis: { domain: [2, 10] },
+      xAxis: { domain: [value.input3 ?? 2, 10] },
+      yAxis: { domain: [value.input4 ?? 2, 10] },
       data: [
         {
           fnType: "parametric",
@@ -107,6 +120,8 @@ export default function Graphs() {
       target: "#third",
       width: 250,
       height: 250,
+      xAxis: { domain: [value.input5 ?? -6, 5] },
+      yAxis: { domain: [value.input6 ?? -2, 12] },
       data: [
         {
           fn: "abs(2x) + 2",
@@ -118,18 +133,25 @@ export default function Graphs() {
       target: "#fourth",
       width: 250,
       height: 250,
-      xAxis: { domain: [-6, 2] },
-      yAxis: { domain: [-2, 8] },
+      xAxis: { domain: [value.input7, -4] },
+      yAxis: { domain: [value.input8, 20] },
       data: [
         {
           fnType: "parametric",
-          x: "-3 * abs(sin(t)) - 5",
+          x: "-1.5 * abs(sin(t)) - 5",
           y: "t",
           graphType: "polyline",
         },
       ],
     });
-  });
+  }
+
+  useEffect(() => {
+    const subscription = watch((value) => {
+      renderGraphs(value as Inputs)
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   return (
     <section className="flex flex-col relative justify-start items-stretch gap-8 fluid-column bg-indigo-200">
@@ -201,7 +223,7 @@ export default function Graphs() {
         </p>
         <p className="py-2 text-center">
           A continuación os mostramos el sistema de ecuaciones que nuestros
-          matemáticos han estudiado.
+          matemáticos han estudiado. Aunque necesitan algún ajuste, ¿nos podéis ayudar?
         </p>
       </section>
 
@@ -222,10 +244,6 @@ export default function Graphs() {
                   {...register("input1")}
                 />
               </div>
-            </div>
-
-            <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
-              <div id="second"></div>
               <div className="flex items-center gap-2">
                 <label htmlFor="input2">x =</label>
                 <input
@@ -237,7 +255,7 @@ export default function Graphs() {
             </div>
 
             <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
-              <div id="third"></div>
+              <div id="second"></div>
               <div className="flex items-center gap-2">
                 <label htmlFor="input3">x =</label>
                 <input
@@ -246,17 +264,53 @@ export default function Graphs() {
                   {...register("input3")}
                 />
               </div>
-            </div>
-
-            <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
-              <div id="fourth"></div>
-
               <div className="flex items-center gap-2">
                 <label htmlFor="input4">x =</label>
                 <input
                   type="number"
                   className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
                   {...register("input4")}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
+              <div id="third"></div>
+              <div className="flex items-center gap-2">
+                <label htmlFor="input5">x =</label>
+                <input
+                  type="number"
+                  className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
+                  {...register("input5")}
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <label htmlFor="input6">x =</label>
+                <input
+                  type="number"
+                  className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
+                  {...register("input6")}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
+              <div id="fourth"></div>
+
+              <div className="flex items-center gap-2">
+                <label htmlFor="input7">x =</label>
+                <input
+                  type="number"
+                  className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
+                  {...register("input7")}
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <label htmlFor="input8">x =</label>
+                <input
+                  type="number"
+                  className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
+                  {...register("input8")}
                 />
               </div>
             </div>
@@ -271,13 +325,14 @@ export default function Graphs() {
           </div>
         </form>
 
-        <section className="flex flex-col justify-start items-center">
+        {nextStepVisible && <section className="flex flex-col justify-start items-center">
           <a href="/labodadebrunoysusana/match">
             <span className="border-2 p-4 rounded-4xl hover:text-indigo-400 hover:cursor-pointer">
               Siguiente
             </span>
           </a>
         </section>
+        }
       </section>
     </section>
   );
