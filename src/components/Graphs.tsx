@@ -1,19 +1,37 @@
 import functionPlot from "function-plot";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import finger from "../images/finger.png";
 
 type Inputs = {
-  input1: number;
-  input2: number;
-  input3: number;
-  input4: number;
+  input11: number;
+  input12: number;
+  input21: number;
+  input22: number;
+  input31: number;
+  input32: number;
+  input41: number;
+  input42: number;
 };
 
 // El código de este juego es la fecha de la boda (7/6/25)
 export default function Graphs() {
+  const [graphsDomain, setGraphsDomain] = useState({
+    first: [0, 10],
+    second: [0, 10],
+    third: [0, 10],
+    fourth: [0, 10],
+  });
   const { register, handleSubmit } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    setGraphsDomain({
+      first: [(data.input11, data.input12)],
+      second: [data.input21, data.input22],
+      third: [data.input31, data.input32],
+      fourth: [data.input32, data.input42],
+    });
+  };
 
   useEffect(() => {
     functionPlot({
@@ -77,8 +95,8 @@ export default function Graphs() {
       target: "#first",
       width: 250,
       height: 250,
-      xAxis: { domain: [-1, 9] },
-      yAxis: { domain: [-1, 9] },
+      xAxis: { domain: [0, 10] },
+      yAxis: { domain: [graphsDomain.first[0], graphsDomain.first[1]] },
       data: [
         {
           fn: "1 / x + 7",
@@ -90,7 +108,7 @@ export default function Graphs() {
       target: "#second",
       width: 250,
       height: 250,
-      xAxis: { domain: [2, 10] },
+      xAxis: { domain: [graphsDomain.second[0], graphsDomain.second[1]] },
       yAxis: { domain: [2, 10] },
       data: [
         {
@@ -107,6 +125,8 @@ export default function Graphs() {
       target: "#third",
       width: 250,
       height: 250,
+      xAxis: { domain: [graphsDomain.third[0], graphsDomain.third[1]] },
+      yAxis: { domain: [-2, 10] },
       data: [
         {
           fn: "abs(2x) + 2",
@@ -118,8 +138,8 @@ export default function Graphs() {
       target: "#fourth",
       width: 250,
       height: 250,
-      xAxis: { domain: [-6, 2] },
-      yAxis: { domain: [-2, 8] },
+      xAxis: { domain: [graphsDomain.fourth[0], graphsDomain.fourth[1]] },
+      yAxis: { domain: [-2, 10] },
       data: [
         {
           fnType: "parametric",
@@ -129,7 +149,7 @@ export default function Graphs() {
         },
       ],
     });
-  });
+  }, [graphsDomain]);
 
   return (
     <section className="flex flex-col relative justify-start items-stretch gap-8 fluid-column bg-indigo-200">
@@ -215,11 +235,21 @@ export default function Graphs() {
               <div id="first"></div>
 
               <div className="flex items-center gap-2">
-                <label htmlFor="input1">x =</label>
+                <label htmlFor="input11">y1 =</label>
                 <input
                   type="number"
                   className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
-                  {...register("input1")}
+                  {...register("input11")}
+                  defaultValue={0}
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <label htmlFor="input12">y2 =</label>
+                <input
+                  type="number"
+                  className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
+                  {...register("input12")}
+                  defaultValue={10}
                 />
               </div>
             </div>
@@ -227,11 +257,21 @@ export default function Graphs() {
             <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
               <div id="second"></div>
               <div className="flex items-center gap-2">
-                <label htmlFor="input2">x =</label>
+                <label htmlFor="input21">x1 =</label>
                 <input
                   type="number"
                   className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
-                  {...register("input2")}
+                  {...register("input21")}
+                  defaultValue={2}
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <label htmlFor="input22">x2 =</label>
+                <input
+                  type="number"
+                  className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
+                  {...register("input22")}
+                  defaultValue={10}
                 />
               </div>
             </div>
@@ -239,11 +279,21 @@ export default function Graphs() {
             <div className="flex flex-col justify-start items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm ">
               <div id="third"></div>
               <div className="flex items-center gap-2">
-                <label htmlFor="input3">x =</label>
+                <label htmlFor="input31">x1 =</label>
                 <input
                   type="number"
                   className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
-                  {...register("input3")}
+                  {...register("input31")}
+                  defaultValue={0}
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <label htmlFor="input32">x2 =</label>
+                <input
+                  type="number"
+                  className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
+                  {...register("input32")}
+                  defaultValue={10}
                 />
               </div>
             </div>
@@ -252,11 +302,21 @@ export default function Graphs() {
               <div id="fourth"></div>
 
               <div className="flex items-center gap-2">
-                <label htmlFor="input4">x =</label>
+                <label htmlFor="input41">x1 =</label>
                 <input
                   type="number"
                   className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
-                  {...register("input4")}
+                  {...register("input41")}
+                  defaultValue={0}
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <label htmlFor="input42">x2 =</label>
+                <input
+                  type="number"
+                  className="form-input bg-white border-2 border-indigo-200 rounded-sm p-2"
+                  {...register("input42")}
+                  defaultValue={10}
                 />
               </div>
             </div>
