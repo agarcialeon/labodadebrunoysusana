@@ -1,360 +1,144 @@
-// Palabras a buscar
-const lovePhases = [
-  "FLECHAZO", // Tinder
-  "ENAMORAMIENTO", // Drugs
-  "COMPROMISO", // Photos
-  "DESILUSION", // Differences
-  "AMOR REAL", // Amor real
-  "TRANSFORMACION", // Origami,
+import React, { useState } from "react";
+
+// Define la estructura de cada palabra
+const words = [
+  { answer: "FLECHAZO", clue: "Impacto repentino del amor", row: 0, col: 0, direction: "across" },
+  { answer: "ENAMORAMIENTO", clue: "Proceso de caer enamorado", row: 2, col: 0, direction: "across" },
+  { answer: "COMPROMISO", clue: "Promesa mutua en la relación", row: 4, col: 0, direction: "across" },
+  { answer: "DESILUSION", clue: "Etapa donde se pierde la ilusión", row: 6, col: 0, direction: "across" },
+  { answer: "AMORREAL", clue: "Amor que va más allá de la idealización", row: 8, col: 0, direction: "across" },
+  { answer: "TRANSFORMACION", clue: "Cambio profundo en la relación", row: 10, col: 0, direction: "across" },
+  { answer: "PREBODA", clue: "Celebración previa a la boda", row: 12, col: 0, direction: "across" },
+  { answer: "FAMILIA", clue: "Base fundamental del matrimonio", row: 0, col: 0, direction: "down" },
+  { answer: "AMIGOS", clue: "Personas queridas que te acompañan", row: 0, col: 2, direction: "down" },
+  { answer: "CEREMONIA", clue: "Acto central de la boda", row: 0, col: 4, direction: "down" },
+  { answer: "BANQUETE", clue: "Comida compartida con los invitados", row: 0, col: 6, direction: "down" },
+  { answer: "TARTA", clue: "Dulce típico de las bodas", row: 0, col: 8, direction: "down" },
+  { answer: "BAILE", clue: "Danza después de la celebración", row: 0, col: 10, direction: "down" },
+  {
+    answer: "SIQUIERO",
+    clue: "Anagrama oculto de la boda",
+    row: 7,
+    col: 7,
+    direction: "diagonal",
+    hidden: true, // No mostrarla como pista visible
+  }
 ];
 
-const weddingWords = [
-  "PREBODA",
-  "FAMILIA",
-  "AMIGOS",
-  "CEREMONIA",
-  "BANQUETE",
-  "TARTA",
-  "BAILE",
-];
+const gridSize = 16;
 
-const finalWord = "SIQUIERO";
+const buildGrid = () => {
+  const grid: (string | null)[][] = Array(gridSize).fill(null).map(() => Array(gridSize).fill(null));
 
-// Añadir palabras como: invitados, iglesia, baile, photocall, para rellenar...
+  for (const word of words) {
+    const { answer, row, col, direction } = word;
 
-// Matriz de letras para la sopa de letras (15x15)
-// Las palabras están en filas separadas, el resto se rellena con 'X'
-const matrix = [
-  [
-    "X",
-    "C",
-    "O",
-    "M",
-    "P",
-    "R",
-    "O",
-    "M",
-    "I",
-    "S",
-    "O",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "X",
-    "E",
-    "N",
-    "A",
-    "M",
-    "O",
-    "R",
-    "A",
-    "M",
-    "I",
-    "E",
-    "N",
-    "T",
-    "O",
-    "X",
-    "X",
-  ],
-  [
-    "X",
-    "X",
-    "X",
-    "M",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "Q",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "E",
-    "X",
-    "X",
-    "O",
-    "D",
-    "E",
-    "S",
-    "I",
-    "L",
-    "U",
-    "S",
-    "I",
-    "O",
-    "N",
-    "X",
-    "X",
-  ],
-  [
-    "T",
-    "X",
-    "X",
-    "R",
-    "X",
-    "X",
-    "I",
-    "N",
-    "V",
-    "I",
-    "T",
-    "A",
-    "D",
-    "O",
-    "S",
-    "X",
-  ],
-  [
-    "E",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "E",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "U",
-    "X",
-    "T",
-    "R",
-    "A",
-    "N",
-    "S",
-    "F",
-    "O",
-    "R",
-    "M",
-    "A",
-    "C",
-    "I",
-    "O",
-    "N",
-  ],
-  [
-    "Q",
-    "X",
-    "X",
-    "E",
-    "C",
-    "E",
-    "R",
-    "E",
-    "M",
-    "O",
-    "N",
-    "I",
-    "A",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "N",
-    "X",
-    "X",
-    "A",
-    "X",
-    "X",
-    "P",
-    "X",
-    "X",
-    "X",
-    "X",
-    "L",
-    "M",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "A",
-    "X",
-    "X",
-    "L",
-    "X",
-    "X",
-    "R",
-    "X",
-    "X",
-    "X",
-    "X",
-    "I",
-    "I",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "B",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "E",
-    "X",
-    "X",
-    "X",
-    "X",
-    "M",
-    "G",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "X",
-    "A",
-    "X",
-    "X",
-    "X",
-    "X",
-    "B",
-    "T",
-    "A",
-    "R",
-    "T",
-    "A",
-    "O",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "X",
-    "X",
-    "I",
-    "X",
-    "X",
-    "X",
-    "O",
-    "X",
-    "X",
-    "X",
-    "X",
-    "F",
-    "S",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "X",
-    "X",
-    "X",
-    "L",
-    "X",
-    "X",
-    "D",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "X",
-    "X",
-    "X",
-    "X",
-    "E",
-    "X",
-    "A",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-  ],
-];
+    for (let i = 0; i < answer.length; i++) {
+      let r = row;
+      let c = col;
 
-export default function Crosswords() {
+      if (direction === "across") c += i;
+      else if (direction === "down") r += i;
+      else if (direction === "diagonal") {
+        r += i;
+        c += i;
+      }
+
+      if (r < gridSize && c < gridSize) grid[r][c] = "";
+    }
+  }
+
+  return grid;
+};
+
+export default function CustomCrossword() {
+  const [grid, setGrid] = useState(buildGrid());
+  const [completedWords, setCompletedWords] = useState<string[]>([]);
+
+  const handleChange = (row: number, col: number, value: string) => {
+    const newGrid = grid.map((r) => [...r]);
+    newGrid[row][col] = value.toUpperCase().slice(-1);
+    setGrid(newGrid);
+
+    // Verificar si alguna palabra se completó
+    const completed = [];
+    for (const word of words) {
+      const { answer, row: r, col: c, direction } = word;
+      let attempt = "";
+
+      for (let i = 0; i < answer.length; i++) {
+        let char;
+        if (direction === "across") char = newGrid[r][c + i];
+        else if (direction === "down") char = newGrid[r + i][c];
+        else if (direction === "diagonal") char = newGrid[r + i][c + i];
+        else continue;
+
+        if (!char || char.length !== 1) {
+          attempt = "";
+          break;
+        }
+
+        attempt += char;
+      }
+
+      if (attempt === word.answer) {
+        completed.push(word.answer);
+      }
+    }
+
+    setCompletedWords(completed);
+  };
+
   return (
-    <section className="flex flex-col fluid-column items-stretch gap-8 bg-gradient-to-bl from-lime-400 to-lime-500 w-full h-full">
-      <div className="flex flex-col items-stretch md:grid md:grid-cols-2 w-full h-full gap-8">
-        <div className="flex flex-col items-stretch gap-8 w-full h-full">
-          <div className="">
-            <h1 className="title">🔠 Palabras cruzadas</h1>
-            <p className="py-4"></p>
-          </div>
-
-          <div className="flex items-center justify-center">
-            <div className="flex flex-col items-stretch gap-8">
-              <h3 className="text-3xl">Palabras a buscar:</h3>
-              <div className="flex justify-between items-center gap-8">
-                <ul className="list-disc">
-                  {lovePhases.map((word) => (
-                    <li>{word}</li>
-                  ))}
-                </ul>
-                <ul className="list-disc">
-                  {weddingWords.map((word) => (
-                    <li>{word}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="flex items-center justify-center">
-                <h3 className="title">- {finalWord} -</h3>
-              </div>
+    <div className="puzzle-container">
+      <h2>🧩 Crucigrama del Amor</h2>
+      <div className="grid">
+        {grid.map((row, rowIndex) =>
+          row.map((cell, colIndex) => (
+            <div key={`${rowIndex}-${colIndex}`} className="cell">
+              {cell !== null ? (
+                <input
+                  type="text"
+                  maxLength={1}
+                  value={grid[rowIndex][colIndex] || ""}
+                  onChange={(e) => handleChange(rowIndex, colIndex, e.target.value)}
+                />
+              ) : (
+                <div className="empty" />
+              )}
             </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-[repeat(16,1fr)] grid-rows-[repeat(16,1fr] select-none font-mono border bg-white rounded">
-          {matrix.flat().map((letter, index) => (
-            <div
-              className="w-full h-full flex items-center justify-center border font-bold  text-xl appearance-none tabular-nums"
-              key={index}
-            >
-              <input
-                type="text"
-                name={letter}
-                id={letter}
-                defaultValue={letter}
-                className="text-center w-full h-full"
-              />
-            </div>
-          ))}
-        </div>
+          ))
+        )}
       </div>
 
-      <section className="w-full flex items-center justify-center">
-        <a
-          href="/labodadebrunoysusana/unlock"
-          className="border-2 p-4 rounded-4xl hover:text-white"
-        >
-          <span>Siguiente</span>
-        </a>
-      </section>
-    </section>
+      <div className="clues">
+        <h3>Pistas:</h3>
+        <ul>
+          {words
+            .filter((w) => !w.hidden)
+            .map((w, i) => (
+              <li key={i}>
+                {w.direction === "across"
+                  ? "→"
+                  : w.direction === "down"
+                    ? "↓"
+                    : "↘"}{" "}
+                {w.clue} {completedWords.includes(w.answer) && "✅"}
+              </li>
+            ))}
+        </ul>
+      </div>
+
+      {completedWords.length === words.length && (
+        <div className="completed-message">
+          🎉 <a
+            href="/labodadebrunoysusana/unlock"
+            className="border-2 p-4 rounded-4xl hover:text-white"
+          >
+            <span>Siguiente</span>
+          </a>
+        </div>
+      )}
+    </div>
   );
 }
