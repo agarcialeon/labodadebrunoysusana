@@ -1,3 +1,9 @@
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { navigate } from "astro:transitions/client";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+
 import mechoImage from "../images/origami/mecho.webp";
 import ochoImage from "../images/origami/ocho.webp";
 import weddingRitual from "../images/origami/wedding-ritual.png";
@@ -27,7 +33,37 @@ const instructionsImagesOcho = [
   ochoInstructions5,
 ];
 
+const formSchema = z.object({
+  mecho: z.literal("amor", {
+    errorMap: () => ({ message: "Valor incorrecto" }),
+  }),
+  ocho: z.literal("real", {
+    errorMap: () => ({ message: "Valor incorrecto" }),
+  }),
+});
+
+type FormSchema = z.infer<typeof formSchema>;
+
 export default function Origami() {
+  const [areInputsValid, setAreInputsValid] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormSchema>({
+    resolver: zodResolver(formSchema),
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+  });
+
+  const formValues = watch();
+
+  const onSubmit: SubmitHandler<FormSchema> = (form: FormSchema) => {
+    setAreInputsValid(true);
+  };
+
   return (
     <section className="flex flex-col fluid-column items-stretch gap-8 bg-gradient-to-bl from-teal-400 to-yellow-200">
       <section>
@@ -85,13 +121,13 @@ export default function Origami() {
         <p className="p-4">
           A continuación, intentaréis desvelar el secreto que esconde el hilo
           rojo al envolver a estas mariposas. Para ello, debéis seguir una hoja
-          de papel o folio y seguir las instrucciones de cada mariposa hasta
-          alcanzar su forma final. Una vez tengáis (cada uno) cada mariposa,
-          pasad al siguiente paso.
+          de papel o folio, algo de beber como agua o té (en vaso) y seguir las
+          instrucciones de cada mariposa hasta alcanzar su forma final. Una vez
+          tengáis (cada uno) cada mariposa, pasad al siguiente paso.
         </p>
       </section>
 
-      <section className="flex justify-around items-center">
+      <section className="flex flex-col items-stretch md:grid md:grid-cols-2 gap-8">
         <div className="flex flex-col items-stretch gap-4">
           <div className="flex justify-center items-center">
             <img
@@ -104,7 +140,7 @@ export default function Origami() {
           <h2 className="text-2xl text-center">Mecho</h2>
           <div className="flex flex-col items-stretch gap-8">
             <h3 className="text-xl text-center">Instrucciones</h3>
-            <div className="flex flex-col items-stretch">
+            <div className="flex flex-col items-center">
               {instructionsImagesMecho.map((instructionImage) => (
                 <img
                   src={instructionImage.src}
@@ -127,7 +163,7 @@ export default function Origami() {
           <h2 className="text-2xl text-center">Ocho</h2>
           <div className="flex flex-col items-stretch gap-8">
             <h3 className="text-xl text-center">Instrucciones</h3>
-            <div className="flex flex-col items-stretch">
+            <div className="flex flex-col items-center">
               {instructionsImagesOcho.map((instructionImage) => (
                 <img
                   src={instructionImage.src}
@@ -138,31 +174,37 @@ export default function Origami() {
             </div>
           </div>
         </div>
+      </section>
 
-        <p>
-          NOTA: Las flechas colocadas entre los pasos indican que hay que dar la
-          vuelta a la hoja de papel para continuar.
-        </p>
+      <section className="text-center">
+        <span className="font-bold">NOTA:</span> Las flechas colocadas entre los
+        pasos indican que hay que dar la vuelta a la hoja de papel para
+        continuar.
       </section>
 
       <section>
         <p className="p-4">
-          Ahora intercambiad vuestras mariposas y escribid las siguientes letras
-          en las puntas de la mariposa del otro.
+          Ahora intercambiad vuestras mariposas y escribid las siguientes
+          palabras en las puntas de la mariposa del otro (alas, cola y pico). La
+          última palabra de cada fila debe it en el pico.
         </p>
-        <p>
-          <div className="grid grid-rows-2 grid-cols-8 gap-4 font-bold text-3xl text-center">
-            <div>一</div>
-            <div>十三</div>
-            <div>十五</div>
-            <div>十八</div>
+        <section className="p-4">
+          <div className="grid grid-rows-2 grid-cols-1 gap-8 md:grid-rows-1 md:grid-cols-2 md:gap-4 font-bold text-sm md:text-xl text-center">
+            <div className="flex items-center justify-around">
+              <div className="p-3 rounded-sm bg-pink-300">一</div>
+              <div className="p-3 rounded-sm bg-pink-300">十三</div>
+              <div className="p-3 rounded-sm bg-pink-300">十五</div>
+              <div className="p-3 rounded-sm bg-pink-300">十八</div>
+            </div>
 
-            <div>十八</div>
-            <div>五</div>
-            <div>一</div>
-            <div>十二</div>
+            <div className="flex items-center justify-around">
+              <div className="p-3 rounded-sm bg-sky-300">十八</div>
+              <div className="p-3 rounded-sm bg-sky-300">五</div>
+              <div className="p-3 rounded-sm bg-sky-300">一</div>
+              <div className="p-3 rounded-sm bg-sky-300">十二</div>
+            </div>
 
-            <div>(ichi)</div>
+            {/* <div>(ichi)</div>
             <div>(jūsan)</div>
             <div>(jūgo)</div>
             <div>(jūhachi)</div>
@@ -170,20 +212,33 @@ export default function Origami() {
             <div>(jūhachi)</div>
             <div>(go)</div>
             <div>(ichi)</div>
-            <div>(jūni)</div>
+            <div>(jūni)</div> */}
           </div>
-        </p>
+        </section>
       </section>
 
       <section>
         <p className="p-4">
-          Una vez escritas, las letras, decid en alto las palabras san - san -
-          ku - do tres veces y devolved la mariposa a la otra persona.
-          Finalmente debéis buscar el significado de cada letra que teneis
-          escrita en vuestra mariposa. Pista: Los caracteres se pueden copiar.
-          Con la traducción de esos caracteres debéis encontrar su lugar en la
-          cadena de letras que usamos para dar sentido a las palabras (pero
-          claro está en nuestro idioma).
+          Una vez escritas, las letras, decid en alto las palabras
+          <span className="mx-1 font-bold">san - san - ku - do</span> tres
+          veces, bebed del vaso, y devolved la mariposa a la otra persona. Dejad
+          las mariposas juntas por el pico, como dando un beso.
+        </p>
+
+        <p className="p-4">
+          Finalmente debéis buscar el significado de cada palabra que el otro os
+          ha escrito en vuestra mariposa.
+          <span className="font-bold mx-1">Pista:</span>
+          Los caracteres se pueden copiar.
+        </p>
+
+        <p className="p-4">
+          Con la traducción de esos caracteres
+          <span className="font-bold mx-1">
+            debéis encontrar su lugar en la cadena de letras
+          </span>
+          que usamos para dar sonido a las palabras (claro está en nuestro
+          idioma).
         </p>
 
         <p className="p-4">
@@ -191,22 +246,59 @@ export default function Origami() {
           continuación:
         </p>
 
-        <div>
-          <label htmlFor="mecho"></label>
-          <input type="text" id="mecho" defaultValue={""} />
-          <label htmlFor="ocho"></label>
-          <input type="text" id="ocho" defaultValue={""} />
-        </div>
+        <section className="p-4">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col items-stretch gap-4"
+          >
+            <div className="flex flex-col items-stretch gap-4 md:grid md:grid-cols-2">
+              <div className="flex flex-col items-stretch gap-4">
+                <label htmlFor="mecho">Suerte de Mecho</label>
+                <input
+                  {...register("mecho")}
+                  className="bg-white rounded-sm p-2"
+                  type="text"
+                  id="mecho"
+                  defaultValue={""}
+                />
+                {errors.mecho && <span>{errors.mecho?.message}</span>}
+              </div>
+
+              <div className="flex flex-col items-stretch gap-4">
+                <label htmlFor="ocho">Suerte de Ocho</label>
+                <input
+                  {...register("ocho")}
+                  className="bg-white rounded-sm p-2"
+                  type="text"
+                  id="ocho"
+                  defaultValue={""}
+                />
+                {errors.ocho && <span>{errors.ocho?.message}</span>}
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center justify-center p-2">
+              <button
+                type="submit"
+                className="hover:cursor-pointer border-2 p-4 rounded-4xl hover:text-white"
+              >
+                Confirmar
+              </button>
+            </div>
+          </form>
+        </section>
       </section>
 
-      <section className="flex items-center justify-center">
-        <a
-          href="/labodadebrunoysusana/cross-words"
-          className="border-2 p-4 rounded-4xl hover:text-white"
-        >
-          <span>Siguiente</span>
-        </a>
-      </section>
+      {areInputsValid && (
+        <section className="flex items-center justify-center">
+          <a
+            href="/labodadebrunoysusana/cross-words"
+            className="border-2 p-4 rounded-4xl hover:text-white"
+          >
+            <span>Siguiente</span>
+          </a>
+        </section>
+      )}
     </section>
   );
 }
