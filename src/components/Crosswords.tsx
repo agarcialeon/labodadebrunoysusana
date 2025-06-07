@@ -1,360 +1,133 @@
-// Palabras a buscar
-const lovePhases = [
-  "FLECHAZO", // Tinder
-  "ENAMORAMIENTO", // Drugs
-  "COMPROMISO", // Photos
-  "DESILUSION", // Differences
-  "AMOR REAL", // Amor real
-  "TRANSFORMACION", // Origami,
+import React, { useState } from "react";
+
+// Define la estructura de cada palabra
+const words = [
+  { answer: "VOTOS", clue: "Compromisos matrimoniales", row: 2, col: 1, direction: "across" },
+  { answer: "AMIGOS", clue: "Personas queridas que te acompañan", row: 3, col: 3, direction: "across" },
+  { answer: "BANQUETE", clue: "Comida compartida con los invitados", row: 4, col: 2, direction: "across" },
+  { answer: "UNION", clue: "Acto oficial", row: 5, col: 5, direction: "across" },
+  { answer: "FAMILIA", clue: "Base fundamental del matrimonio", row: 6, col: 2, direction: "across" },
+  { answer: "CEREMONIA", clue: "Acto central de la boda", row: 7, col: 2, direction: "across" },
+  { answer: "RAMO", clue: "Objeto de deseo por las damas de honor", row: 8, col: 5, direction: "across" },
+  { answer: "COMPROMISO", clue: "Promesa mutua en la relación", row: 9, col: 0, direction: "across" },
 ];
 
-const weddingWords = [
-  "PREBODA",
-  "FAMILIA",
-  "AMIGOS",
-  "CEREMONIA",
-  "BANQUETE",
-  "TARTA",
-  "BAILE",
-];
+const gridSize = 12;
 
-const finalWord = "SIQUIERO";
+const buildGrid = () => {
+  const grid: (string | null)[][] = Array(gridSize).fill(null).map(() => Array(gridSize).fill(null));
 
-// Añadir palabras como: invitados, iglesia, baile, photocall, para rellenar...
+  for (const word of words) {
+    const { answer, row, col, direction } = word;
 
-// Matriz de letras para la sopa de letras (15x15)
-// Las palabras están en filas separadas, el resto se rellena con 'X'
-const matrix = [
-  [
-    "X",
-    "C",
-    "O",
-    "M",
-    "P",
-    "R",
-    "O",
-    "M",
-    "I",
-    "S",
-    "O",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "X",
-    "E",
-    "N",
-    "A",
-    "M",
-    "O",
-    "R",
-    "A",
-    "M",
-    "I",
-    "E",
-    "N",
-    "T",
-    "O",
-    "X",
-    "X",
-  ],
-  [
-    "X",
-    "X",
-    "X",
-    "M",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "Q",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "E",
-    "X",
-    "X",
-    "O",
-    "D",
-    "E",
-    "S",
-    "I",
-    "L",
-    "U",
-    "S",
-    "I",
-    "O",
-    "N",
-    "X",
-    "X",
-  ],
-  [
-    "T",
-    "X",
-    "X",
-    "R",
-    "X",
-    "X",
-    "I",
-    "N",
-    "V",
-    "I",
-    "T",
-    "A",
-    "D",
-    "O",
-    "S",
-    "X",
-  ],
-  [
-    "E",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "E",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "U",
-    "X",
-    "T",
-    "R",
-    "A",
-    "N",
-    "S",
-    "F",
-    "O",
-    "R",
-    "M",
-    "A",
-    "C",
-    "I",
-    "O",
-    "N",
-  ],
-  [
-    "Q",
-    "X",
-    "X",
-    "E",
-    "C",
-    "E",
-    "R",
-    "E",
-    "M",
-    "O",
-    "N",
-    "I",
-    "A",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "N",
-    "X",
-    "X",
-    "A",
-    "X",
-    "X",
-    "P",
-    "X",
-    "X",
-    "X",
-    "X",
-    "L",
-    "M",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "A",
-    "X",
-    "X",
-    "L",
-    "X",
-    "X",
-    "R",
-    "X",
-    "X",
-    "X",
-    "X",
-    "I",
-    "I",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "B",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "E",
-    "X",
-    "X",
-    "X",
-    "X",
-    "M",
-    "G",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "X",
-    "A",
-    "X",
-    "X",
-    "X",
-    "X",
-    "B",
-    "T",
-    "A",
-    "R",
-    "T",
-    "A",
-    "O",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "X",
-    "X",
-    "I",
-    "X",
-    "X",
-    "X",
-    "O",
-    "X",
-    "X",
-    "X",
-    "X",
-    "F",
-    "S",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "X",
-    "X",
-    "X",
-    "L",
-    "X",
-    "X",
-    "D",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-  ],
-  [
-    "X",
-    "X",
-    "X",
-    "X",
-    "E",
-    "X",
-    "A",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-    "X",
-  ],
-];
+    for (let i = 0; i < answer.length; i++) {
+      let r = row;
+      let c = col;
 
-export default function Crosswords() {
+      if (direction === "across") c += i;
+       if (direction === "down") r += i;
+
+      if (r < gridSize && c < gridSize) grid[r][c] = "";
+    }
+  }
+
+  return grid;
+};
+
+export default function CustomCrossword() {
+  const [grid, setGrid] = useState(buildGrid());
+  const [completedWords, setCompletedWords] = useState<string[]>([]);
+
+  const handleChange = (row: number, col: number, value: string) => {
+    const newGrid = grid.map((r) => [...r]);
+    newGrid[row][col] = value.toUpperCase().slice(-1);
+    setGrid(newGrid);
+
+    // Verificar si alguna palabra se completó
+    const completed = [];
+    for (const word of words) {
+      const { answer, row: r, col: c, direction } = word;
+      let attempt = "";
+
+      for (let i = 0; i < answer.length; i++) {
+        let char;
+        if (direction === "across") char = newGrid[r][c + i];
+        else if (direction === "down") char = newGrid[r + i][c];
+        else continue;
+
+        if (!char || char.length !== 1) {
+          attempt = "";
+          break;
+        }
+
+        attempt += char;
+      }
+
+      if (attempt === word.answer) {
+        completed.push(word.answer);
+      }
+    }
+
+    setCompletedWords(completed);
+  };
+
   return (
-    <section className="flex flex-col fluid-column items-stretch gap-8 bg-gradient-to-bl from-lime-400 to-lime-500 w-full h-full">
-      <div className="flex flex-col items-stretch md:grid md:grid-cols-2 w-full h-full gap-8">
-        <div className="flex flex-col items-stretch gap-8 w-full h-full">
-          <div className="">
-            <h1 className="title">🔠 Palabras cruzadas</h1>
-            <p className="py-4"></p>
-          </div>
+    <div className="puzzle-container">
+      <h2>🧩 Crucigrama del Amor</h2>
 
-          <div className="flex items-center justify-center">
-            <div className="flex flex-col items-stretch gap-8">
-              <h3 className="text-3xl">Palabras a buscar:</h3>
-              <div className="flex justify-between items-center gap-8">
-                <ul className="list-disc">
-                  {lovePhases.map((word) => (
-                    <li>{word}</li>
-                  ))}
-                </ul>
-                <ul className="list-disc">
-                  {weddingWords.map((word) => (
-                    <li>{word}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="flex items-center justify-center">
-                <h3 className="title">- {finalWord} -</h3>
-              </div>
+      <div
+        className="grid"
+        style={{ gridTemplateColumns: `repeat(${gridSize}, 2rem)` }}
+      >
+        {grid.map((row, rowIndex) =>
+          row.map((cell, colIndex) => (
+            <div key={`${rowIndex}-${colIndex}`} className={`cell ${
+    cell === null ? "empty" : ""
+  } ${
+    colIndex === 5 && rowIndex >= 2 && rowIndex <= 10 ? "special-column" : ""
+  }`}>
+              {cell !== null ? (
+                <input
+                  type="text"
+                  maxLength={1}
+                  value={grid[rowIndex][colIndex] || ""}
+                  onChange={(e) =>
+                    handleChange(rowIndex, colIndex, e.target.value)
+                  }
+                />
+              ) : (
+                <div className="empty" />
+              )}
             </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-[repeat(16,1fr)] grid-rows-[repeat(16,1fr] select-none font-mono border bg-white rounded">
-          {matrix.flat().map((letter, index) => (
-            <div
-              className="w-full h-full flex items-center justify-center border font-bold  text-xl appearance-none tabular-nums"
-              key={index}
-            >
-              <input
-                type="text"
-                name={letter}
-                id={letter}
-                defaultValue={letter}
-                className="text-center w-full h-full"
-              />
-            </div>
-          ))}
-        </div>
+          ))
+        )}
+      </div>
+      <div className="clues">
+        <h3>Pistas:</h3>
+        <ul>
+          {words
+            .filter((w) => !w.hidden)
+            .map((w, i) => (
+              <li key={i}>
+                {w.direction === "across"
+                  ? "→"
+                  : "↓"}{" "}
+                {w.clue} {completedWords.includes(w.answer) && "✅"}
+              </li>
+            ))}
+        </ul>
       </div>
 
-      <section className="w-full flex items-center justify-center">
-        <a
-          href="/labodadebrunoysusana/unlock"
-          className="border-2 p-4 rounded-4xl hover:text-white"
-        >
-          <span>Siguiente</span>
-        </a>
-      </section>
-    </section>
+      {completedWords.length === words.length && (
+        <div className="completed-message">
+          🎉🎉🎉 <a
+            href="/labodadebrunoysusana/unlock"
+            className="border-2 p-4 rounded-4xl hover:text-white"
+          >
+            <span>Siguiente</span>
+          </a>🎉🎉🎉
+        </div>
+      )}
+    </div>
   );
 }
