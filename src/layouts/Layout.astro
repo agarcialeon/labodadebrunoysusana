@@ -148,8 +148,8 @@ const { title } = Astro.props;
 .grid {
   background-color: gray;
   display: grid;
-  grid-template-columns: repeat(16, 32px);
-  grid-template-rows: repeat(16, 32px);
+  grid-template-columns: repeat(12, 32px);
+  grid-template-rows: repeat(12, 32px);
   gap: 2px;
   margin-bottom: 2rem;
 }
@@ -186,9 +186,17 @@ const { title } = Astro.props;
 }
 
 .completed-message {
-  margin-top: 2rem;
+    margin-top: 2rem;
   font-size: 1.2rem;
   color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
+.special-column {
+  background-color: green;
+  color: white;
+}
 </style>
