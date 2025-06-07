@@ -1,12 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ClientRouter from "astro/components/ClientRouter.astro";
-import Drugs from "../components/Drugs.astro";
+import Drugs from "../components/Drugs";
 ---
 
 <Layout title="Amor y otras drogas | La boda de Bruno y Susana">
   <ClientRouter />
   <main class="">
-    <Drugs transition:animate="fade" />
+    <Drugs transition:animate="fade" client:load />
   </main>
 </Layout>
