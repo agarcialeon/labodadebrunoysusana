@@ -1,5 +1,4 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { navigate } from "astro:transitions/client";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -57,8 +56,6 @@ export default function Origami() {
     mode: "onSubmit",
     reValidateMode: "onChange",
   });
-
-  const formValues = watch();
 
   const onSubmit: SubmitHandler<FormSchema> = (form: FormSchema) => {
     setAreInputsValid(true);

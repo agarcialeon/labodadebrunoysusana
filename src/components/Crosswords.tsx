@@ -1,21 +1,71 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 // Define la estructura de cada palabra
 const words = [
-  { answer: "VOTOS", clue: "Compromisos matrimoniales", row: 2, col: 1, direction: "across" },
-  { answer: "AMIGOS", clue: "Personas queridas que te acompañan", row: 3, col: 3, direction: "across" },
-  { answer: "BANQUETE", clue: "Comida compartida con los invitados", row: 4, col: 2, direction: "across" },
-  { answer: "UNION", clue: "Acto oficial", row: 5, col: 5, direction: "across" },
-  { answer: "FAMILIA", clue: "Base fundamental del matrimonio", row: 6, col: 2, direction: "across" },
-  { answer: "CEREMONIA", clue: "Acto central de la boda", row: 7, col: 2, direction: "across" },
-  { answer: "RAMO", clue: "Objeto de deseo por las damas de honor", row: 8, col: 5, direction: "across" },
-  { answer: "COMPROMISO", clue: "Promesa mutua en la relación", row: 9, col: 0, direction: "across" },
+  {
+    answer: "VOTOS",
+    clue: "Compromisos matrimoniales",
+    row: 2,
+    col: 1,
+    direction: "across",
+  },
+  {
+    answer: "AMIGOS",
+    clue: "Personas queridas que te acompañan",
+    row: 3,
+    col: 3,
+    direction: "across",
+  },
+  {
+    answer: "BANQUETE",
+    clue: "Comida compartida con los invitados",
+    row: 4,
+    col: 2,
+    direction: "across",
+  },
+  {
+    answer: "UNION",
+    clue: "Acto oficial",
+    row: 5,
+    col: 5,
+    direction: "across",
+  },
+  {
+    answer: "FAMILIA",
+    clue: "Base fundamental del matrimonio",
+    row: 6,
+    col: 2,
+    direction: "across",
+  },
+  {
+    answer: "CEREMONIA",
+    clue: "Acto central de la boda",
+    row: 7,
+    col: 2,
+    direction: "across",
+  },
+  {
+    answer: "RAMO",
+    clue: "Objeto de deseo por las damas de honor",
+    row: 8,
+    col: 5,
+    direction: "across",
+  },
+  {
+    answer: "COMPROMISO",
+    clue: "Promesa mutua en la relación",
+    row: 9,
+    col: 0,
+    direction: "across",
+  },
 ];
 
 const gridSize = 12;
 
 const buildGrid = () => {
-  const grid: (string | null)[][] = Array(gridSize).fill(null).map(() => Array(gridSize).fill(null));
+  const grid: (string | null)[][] = Array(gridSize)
+    .fill(null)
+    .map(() => Array(gridSize).fill(null));
 
   for (const word of words) {
     const { answer, row, col, direction } = word;
@@ -25,7 +75,7 @@ const buildGrid = () => {
       let c = col;
 
       if (direction === "across") c += i;
-       if (direction === "down") r += i;
+      if (direction === "down") r += i;
 
       if (r < gridSize && c < gridSize) grid[r][c] = "";
     }
@@ -72,62 +122,65 @@ export default function CustomCrossword() {
   };
 
   return (
-    <div className="puzzle-container">
-      <h2>🧩 Crucigrama del Amor</h2>
+    <section className="bg-green-500 w-full h-full p-4">
+      <div className="puzzle-container w-fit h-fit">
+        <h2 className="text-4xl text-center">🧩 Palabras cruzadas</h2>
 
-      <div
-        className="grid"
-        style={{ gridTemplateColumns: `repeat(${gridSize}, 2rem)` }}
-      >
-        {grid.map((row, rowIndex) =>
-          row.map((cell, colIndex) => (
-            <div key={`${rowIndex}-${colIndex}`} className={`cell ${
-    cell === null ? "empty" : ""
-  } ${
-    colIndex === 5 && rowIndex >= 2 && rowIndex <= 10 ? "special-column" : ""
-  }`}>
-              {cell !== null ? (
-                <input
-                  type="text"
-                  maxLength={1}
-                  value={grid[rowIndex][colIndex] || ""}
-                  onChange={(e) =>
-                    handleChange(rowIndex, colIndex, e.target.value)
-                  }
-                />
-              ) : (
-                <div className="empty" />
-              )}
-            </div>
-          ))
-        )}
-      </div>
-      <div className="clues">
-        <h3>Pistas:</h3>
-        <ul>
-          {words
-            .filter((w) => !w.hidden)
-            .map((w, i) => (
+        <div
+          className="grid"
+          style={{ gridTemplateColumns: `repeat(${gridSize}, 2rem)` }}
+        >
+          {grid.map((row, rowIndex) =>
+            row.map((cell, colIndex) => (
+              <div
+                key={`${rowIndex}-${colIndex}`}
+                className={`cell ${cell === null ? "empty" : ""} ${
+                  colIndex === 5 && rowIndex >= 2 && rowIndex <= 10
+                    ? "special-column"
+                    : ""
+                }`}
+              >
+                {cell !== null ? (
+                  <input
+                    type="text"
+                    maxLength={1}
+                    value={grid[rowIndex][colIndex] || ""}
+                    onChange={(e) =>
+                      handleChange(rowIndex, colIndex, e.target.value)
+                    }
+                  />
+                ) : (
+                  <div className="empty" />
+                )}
+              </div>
+            ))
+          )}
+        </div>
+        <div className="clues">
+          <h3>Pistas:</h3>
+          <ul>
+            {words.map((w, i) => (
               <li key={i}>
-                {w.direction === "across"
-                  ? "→"
-                  : "↓"}{" "}
-                {w.clue} {completedWords.includes(w.answer) && "✅"}
+                {w.direction === "across" ? "→" : "↓"} {w.clue}{" "}
+                {completedWords.includes(w.answer) && "✅"}
               </li>
             ))}
-        </ul>
-      </div>
-
-      {completedWords.length === words.length && (
-        <div className="completed-message">
-          🎉🎉🎉 <a
-            href="/labodadebrunoysusana/unlock"
-            className="border-2 p-4 rounded-4xl hover:text-white"
-          >
-            <span>Siguiente</span>
-          </a>🎉🎉🎉
+          </ul>
         </div>
-      )}
-    </div>
+
+        {completedWords.length === words.length && (
+          <div className="completed-message">
+            🎉🎉🎉{" "}
+            <a
+              href="/labodadebrunoysusana/unlock"
+              className="border-2 p-4 rounded-4xl hover:text-white"
+            >
+              <span>Siguiente</span>
+            </a>
+            🎉🎉🎉
+          </div>
+        )}
+      </div>
+    </section>
   );
 }

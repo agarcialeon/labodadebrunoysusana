@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import finger from "../images/finger.png";
 
 const steps = [
