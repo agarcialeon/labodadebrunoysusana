@@ -212,9 +212,9 @@ export default function Vault() {
 
             <p className="py-4">
               Como agradecimiento por vuestra paciencia con nuestro equipo, la
-              destreza mostrada en las pruebas y por lo ___ que sois, os hacemos
-              obsequio de esta tarjeta virtual donde haremos la transferencia
-              como regalo de bodas.
+              destreza mostrada en las pruebas y por lo "chachi pistachis" que
+              sois, os hacemos obsequio de esta tarjeta virtual donde haremos la
+              transferencia como regalo de bodas.
             </p>
 
             <p className="py-4">
